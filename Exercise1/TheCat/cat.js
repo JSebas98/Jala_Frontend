@@ -107,13 +107,14 @@ let misifus = new Cat(10, 10, 10);
 let tommy = new Cat(8, 5, 3);
 let katty = new Cat(4, 9, 6);
 
-// misifus.feed();
-// misifus.getStatus();
-// misifus.sleep();
-// misifus.getStatus();
-console.log(misifus.getHungerLevel());
-console.log(misifus.getLonelinessLevel());
-console.log(misifus.getTirednessLevel());
+misifus.getStatus();
+misifus.feed();
+misifus.getStatus();
+misifus.sleep();
+misifus.getStatus();
+// console.log(misifus.getHungerLevel());
+// console.log(misifus.getLonelinessLevel());
+// console.log(misifus.getTirednessLevel());
 misifus.play();
 misifus.getStatus();
 

@@ -5,18 +5,18 @@
  * Sample output: a (5 times)
  */
 
-// let arr1 = [3, 'a', 'a', 'a', 2, 3, 'a', 3, 'a', 2, 4, 9, 3]
+let arr1 = [3, 'a', 'a', 'a', 2, 3, 'a', 3, 'a', 2, 4, 9, 3]
 
-// function findMostFrequent(arr){
-//     let values = {};
-//     arr.map((val) => {
-//         return val in values ? values[val] += 1 : values[val] = 1;  
-//     });
-//     return Object.keys(values).
-//         reduce((prevKey, actKey) => {
-//             return values[prevKey] > values[actKey] ? `${prevKey}: ${values[prevKey]}` : `${actKey}: ${values[actKey]}`
-//         });
-// }
+function findMostFrequent(arr){
+    let values = {};
+    arr.map((val) => {
+        return val in values ? values[val] += 1 : values[val] = 1;  
+    });
+    return Object.keys(values).
+        reduce((prevKey, actKey) => {
+            return values[prevKey] > values[actKey] ? `${prevKey}: ${values[prevKey]}` : `${actKey}: ${values[actKey]}`
+        });
+}
 
 // console.log(findMostFrequent(arr1));
 
@@ -32,7 +32,7 @@
 // function sumSquares(numbers) {
 //     return numbers.reduce((total, n) => {
 //         return total + n ** 2;
-//     });
+//     }, 0);
 // }
 
 // console.log(sumSquares(arr1));

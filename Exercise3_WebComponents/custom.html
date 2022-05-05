@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web Component Bootcamp</title>
+  </head>
+  <body>
+    <jala-card
+      id="SpongeBob"
+      role="Developer"
+      image-logo="https://jalasoft.com/img/logo-jalasoft.svg"
+      image="https://www.ecured.cu/images/thumb/e/e3/Bob-esponja23.jpg/1200px-Bob-esponja23.jpg"
+      name="SpongeBob SquarePants"
+    >
+    </jala-card>
+
+    <template id="userCardTemplate">
+      <style>
+        :host {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          overflow: hidden;
+          padding: 10px;
+          box-sizing: border-box;
+          font-family: "Poppins", sans-serif;
+        }
+
+        .container {
+          display: grid;
+          grid-template-columns: 260px;
+          grid-template-rows: 60px 250px 40px;
+          grid-template-areas: "logo" "image" "name" "role";
+
+          background:rgba(0, 0, 0, 0.8);
+          box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
+          text-align: center;
+          border-style: solid;
+          border-color: #0e0d0d;
+        }
+
+        .header-container {
+            grid-area: logo;
+            display: flex;
+            flex: 0.5;
+            align-items: center;
+            flex-direction: column-reverse;
+            background-color: #fff;
+            border: #0e0d0d;
+        }
+
+        .image {
+          flex: 0 0 auto;
+          width: 160px;
+          height: 160px;
+          vertical-align: middle;
+          border-radius:50px;
+        }
+
+        .logo {
+          flex: 0,5;
+          vertical-align: middle;
+          padding: 5px;
+        }        
+
+        .worker-container {
+            display: flex;
+            flex: 0;
+            align-items: center;
+            flex-direction: column-reverse;
+        }
+
+        .worker-name {
+          grid-area: name;
+        }
+
+        .worker-image {
+          grid-area: image
+        }
+
+        .container > .worker-container > .worker-name > .name {
+          font-size: 20px;
+          font-weight: 600;
+          line-height: 1;
+          color: #fff;
+        }
+
+        .role-container {
+            grid-area: role;
+            display: flex;
+            flex: 0.5;
+            align-items: center;
+            flex-direction: column-reverse;
+            background-color: rgb(241, 57, 57);
+        }
+
+        .container > .role-container > .role {
+          font-size: 20px;
+          font-weight: 600;
+          line-height: 1;
+          margin: 5px;
+          color: #fff;
+        }
+
+        
+
+      </style>
+
+      <div class="container">
+        <div class="header-container">
+          <img src="" class="logo" />
+        </div>
+        <div class="worker-container">
+          <div class="worker-name">
+            <p class="name"></p>
+          </div>
+          <div class="worker-image">
+            <img src="" class="image" />
+          </div>
+        </div>
+        <div class="role-container">
+            <p class="role"></p>
+        </div>
+      </div>
+
+    </template>
+
+    <script>
+      class JalaId extends HTMLElement {
+        constructor() {
+          super();
+
+          let shadow = this.attachShadow({ mode: "closed" });
+
+          let templateElem = document.getElementById("userCardTemplate");
+          let content = templateElem.content.cloneNode(true);
+
+          content.querySelector("div.worker-container>.worker-image>img").setAttribute("src", this.getAttribute("image"));
+
+          content.querySelector("div.header-container>img").setAttribute("src", this.getAttribute("image-logo"));
+
+          content.querySelector(".container>.worker-container>.worker-name>.name").innerText = this.getAttribute("name");
+
+          content.querySelector(".container>.role-container>.role").innerText = this.getAttribute("role");
+
+          shadow.appendChild(content);
+        }
+      }
+      customElements.define("jala-card", JalaId);
+    </script>
+  </body>
+</html>

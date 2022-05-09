@@ -1,7 +1,7 @@
 // Fetching from PokeAPI usinf API Fetch}
 const offset = 0;
 
-fetch(`https://pokeapi.co/api/v2/pokemon/?offset=${offset}&limit=20`)
+fetch(`https://pokeapi.co/api/v2/pokemon/?offset=${offset}&limit=25`)
     .then((resp) => resp.json()) // Convert into json
     .then((data) => {
         let pokemons = data.results;

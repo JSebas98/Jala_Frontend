@@ -1,0 +1,29 @@
+.header {
+    display: grid;
+    grid-template-columns: 20% 20% 60%;
+}
+
+#pokemon-logo {
+    width: auto;
+    height: 80px;
+    grid-column-start: 1;
+    grid-column-end: 2;
+    padding: 10px;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.footer {
+    display: grid;
+    grid-template-columns: 20% 40% 40%;
+}
+
+#test2 {
+    font-size: 20px;
+    grid-column-start: 3;
+    grid-column-end: 3;
+}

@@ -1,29 +1,116 @@
-.header {
+body {
+    margin: 0;
+}
+
+header {
     display: grid;
-    grid-template-columns: 20% 20% 60%;
+    grid-template-columns: 15% 20% 75%;
+    grid-gap: 0px 10px;
+    grid-template-areas:
+    " logo pokedex extra" ;
+    justify-items: center;
+    align-items: center;
+    
+    padding: 10px;
+
+    box-shadow: 0px 0px 15px rgb(82, 80, 80);
+    
 }
 
 #pokemon-logo {
+    display: grid;
+    grid-area: logo;
+    justify-items: center;
+    align-items: center;
+
     width: auto;
-    height: 80px;
-    grid-column-start: 1;
-    grid-column-end: 2;
+    height: 70px;
     padding: 10px;
+}
+
+#pokedex-logo {
+    grid-area: pokedex;
+}
+
+#pokedex-icon {
+    justify-self: start;
+    align-self: center;
+
+    height: 50px;
+}
+
+#pokedex-txt {
+
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 26px;
+    font-weight: 700;
+
 }
 
 .container {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
+
+    margin: 15px;
 }
 
-.footer {
+footer {
     display: grid;
-    grid-template-columns: 20% 40% 40%;
+    grid-template-columns: 30% 40% 30%;
+    grid-template-areas:
+    " trademark social legal";
+    align-items: center;
+    justify-items: center;
+
+    background-color: #E3350D;
+    box-shadow: 5px 0px 5px 5px #d84726;
 }
 
-#test2 {
+#trademark {
+    grid-area: trademark;
+}
+
+#trademark > .trademark-txt {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 12px;
+    padding: 0px 0px 0px 15px;
+    margin: 5px;
+
+    color: #fff;
+}
+
+#trademark > #pokemon-logo-footer {
+    width: auto;
+    height: 70px;
+}
+
+#social-media {
+    grid-area: social;
+}
+
+#social-media > .social-img {
+    width: 30px;
+    padding-right: 10px;
+    box-shadow: 10px, 10px, 10px, 1px, #fff;
+    margin-bottom: 10px;
+}
+
+#social-media > #social-txt {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 20px;
-    grid-column-start: 3;
-    grid-column-end: 3;
+    color: #fff;
+}
+
+#legal {
+    grid-area: legal;
+}
+
+#legal > .footer-txt {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 14px;
+    padding: 0px 0px 0px 15px;
+    margin: 5px;
+
+    color: #fff;
 }

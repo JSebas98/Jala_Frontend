@@ -9,17 +9,41 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="header">
+    <header class="header">
         <img id="pokemon-logo" src="imgs/pokemon-logo.png">
-    </div>
+        <div id="pokedex-logo">
+            <img id="pokedex-icon" src="imgs/icon-pokedex.png">
+            <p id="pokedex-txt">Pokedex</p>
+        </div>
+    </header>
 
     <div class="container" id="pokedex">
         <!--Here is where all the poke-cards will be dinamically created-->
     </div>
 
-    <div class="footer">
-        <p id="test2">This is the footer.</p>
-    </div>
+    <footer class="footer">
+        <div id="trademark">
+            <img id="pokemon-logo-footer" src="imgs/pokemon-logo.png">
+            <p class="trademark-txt">©2022 Pokémon. ©1995-2022</p>
+            <p class="trademark-txt">®Nintendo</p>
+        </div>
+        
+        <div id="social-media">
+            <p id="social-txt">Follow us in social!</p>
+            <img class="social-img" src="imgs/facebook.png"/>
+            <img class="social-img" src="imgs/instagram.png"/>
+            <img class="social-img" src="imgs/twitter.png"/>
+            <img class="social-img" src="imgs/youtube.png"/>
+        </div>
+
+        <div id="legal">
+            <p class="footer-txt">Términos de uso</p>
+            <p class="footer-txt">Aviso sobre la privacidad</p>
+            <p class="footer-txt">Cookies</p>
+            <p class="footer-txt">Información legal</p>
+        </div>
+        
+    </footer>
 
     <script src="utils.js"></script>
     <script src="pokemon-card.js"></script>

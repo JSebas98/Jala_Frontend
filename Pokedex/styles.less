@@ -1,16 +1,26 @@
-@whole-screen: 1 / span 5;
+@whole-screen: 1 / 6;
 @footer-text-size: 0.8rem;
+
+#colors() {
+    footer: #fff;
+}
 
 body {
     display: grid;
     margin: 0;
-    grid-template-rows: 5% auto 10%;
-    grid-template-columns: repeat(5, 20%);
-    grid-template-areas: "header header header header header" "body body body body body" "footer . footer . footer";
+    grid-template-rows: repeat(5, auto);
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-areas:
+    "header header header header header"
+    "body body body body body"
+    "social social social social social"
+    "trademark trademark trademark trademark trademark"
+    "legal legal legal legal legal"
 }
 
 header {
     display: flex;
+    grid-area: header;
     grid-column: @whole-screen;
     justify-content: space-between;
     align-items: center;
@@ -37,16 +47,15 @@ header {
         height: 3rem;
     }
     #pokedex-txt {
-
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         font-size: 22px;
         font-weight: 700;
-    
     }
 }
 
 .container {
     display: flex;
+    grid-area: body;
     grid-column: @whole-screen;
     flex-wrap: wrap;
     justify-content: space-evenly;
@@ -55,54 +64,117 @@ header {
 }
 
 footer {
-    display: flex;
     grid-column: @whole-screen;
-    justify-content: space-evenly;
-    align-items: center;
-
+    margin: 0px;
     background-color: #E3350D;
 }
 
 #trademark {
+    display: flex;
+    grid-area: trademark;
+    justify-content: center;
+    
 
     #pokemon-logo-footer {
         width: auto;
         height: 4rem;
-        padding: 10px;
+        padding: 5px;
     }
     
     .trademark-txt {
+        display: none;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         font-size: @footer-text-size;
-        padding: 0px 0px 0px 15px;
         margin: 5px;
 
-        color: #fff;
+        color: #colors[footer];
     }
 }
 
 #social-media {
+    display: flex;
+    grid-area: social;
+    justify-content: center;
+    align-items: center;
+
     .social-img {
-        width: 2rem;
-        padding: 10px;
-        box-shadow: 10px, 10px, 10px, 1px, #fff;
-        margin-bottom: 10px;
-    }
-    #social-txt {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        font-size: 1.5rem;
-        color: #fff;
-        text-align: center;
+        width: 1.5rem;
+        padding: 5px;
     }
 }
 
 #legal {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    grid-area: legal;
+
     .footer-txt {
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         font-size: @footer-text-size;
         padding: 0px 0px 0px 15px;
         margin: 5px;
 
-        color: #fff;
+        color: #colors[footer];
+    }
+}
+
+@media screen and (max-width: 499px) {
+    #pokedex-txt {
+        display: none;
+    }
+
+    #legal {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+@media screen and (min-width: 735px) {
+
+    body {
+        grid-template-rows: repeat(3, auto);
+        grid-template-areas: "header header header header header" "body body body body body" "footer footer footer footer footer";
+    }
+
+    footer {
+        display: flex;
+        grid-column: @whole-screen;
+        justify-content: space-evenly;
+        align-items: center;
+
+        background-color: #E3350D;
+    }
+
+    #trademark {
+        
+        .trademark-txt {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: @footer-text-size;
+            padding: 0px 0px 0px 15px;
+            margin: 5px;
+
+            color: #colors[footer];
+        }
+    }
+
+    #social-media {
+        .social-img {
+            width: 2rem;
+            padding: 10px;
+            box-shadow: 10px, 10px, 10px, 1px, #fff;
+            margin-bottom: 10px;
+        }
+    }
+
+    #legal {
+        .footer-txt {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: @footer-text-size;
+            padding: 0px 0px 0px 15px;
+            margin: 5px;
+
+            color: #colors[footer];
+        }
     }
 }

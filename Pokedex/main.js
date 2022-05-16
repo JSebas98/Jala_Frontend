@@ -1,3 +1,7 @@
+// Initializing popovers
+const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]');
+const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl));
+
 // Fetching from PokeAPI usinf API Fetch}
 const offset = 0;
 

@@ -30,27 +30,31 @@ header {
 
 #pokemon-logo {
     width: auto;
-    height: 4rem;
+    height: 4.5rem;
     padding: 10px;
     margin-left: 10px;
 }
 
-#pokedex-logo {
+#pokedex-btn {
     display: flex;
-    flex-direction: row;
-    padding: 10px;
-    #pokedex-icon {
-        justify-self: start;
-        align-self: center;
-        padding: 10px;
-    
-        height: 3rem;
-    }
-    #pokedex-txt {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        font-size: 22px;
-        font-weight: 700;
-    }
+    align-content: center;
+    margin-right: 1rem;
+    background-color: #E3350D;
+    border-radius: 10px;
+
+    transition-duration: 0.4s;
+}
+
+#pokedex-btn:hover {
+    background-color: #fff;
+    cursor: pointer;
+}
+
+#pokedex-icon {
+    justify-self: end;
+    align-self: center;
+
+    height: 2rem;
 }
 
 .container {
@@ -61,6 +65,15 @@ header {
     justify-content: space-evenly;
 
     padding: 15px;
+    margin: 0px;
+}
+
+#newCardModal {
+    display: none;
+}
+
+.more-info {
+    height: 1rem;
 }
 
 footer {
@@ -80,25 +93,17 @@ footer {
         height: 4rem;
         padding: 5px;
     }
-    
-    .trademark-txt {
-        display: none;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        font-size: @footer-text-size;
-        margin: 5px;
 
-        color: #colors[footer];
-    }
 }
 
 #social-media {
     display: flex;
     grid-area: social;
     justify-content: center;
-    align-items: center;
+    align-content: center;
 
     .social-img {
-        width: 1.5rem;
+        width: 2rem;
         padding: 5px;
     }
 }
@@ -120,8 +125,9 @@ footer {
 }
 
 @media screen and (max-width: 499px) {
-    #pokedex-txt {
-        display: none;
+    
+    #pokedex-icon {    
+        height: 2rem;
     }
 
     #legal {
@@ -131,6 +137,18 @@ footer {
 }
 
 @media screen and (min-width: 735px) {
+
+    #pokemon-logo {
+        height: 5rem;
+    }
+
+    #pokedex-btn {
+        margin-right: 2rem;
+    }
+
+    #pokedex-icon {    
+        height: 2.5rem;
+    }
 
     body {
         grid-template-rows: repeat(3, auto);
@@ -146,24 +164,11 @@ footer {
         background-color: #E3350D;
     }
 
-    #trademark {
-        
-        .trademark-txt {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            font-size: @footer-text-size;
-            padding: 0px 0px 0px 15px;
-            margin: 5px;
-
-            color: #colors[footer];
-        }
-    }
-
     #social-media {
         .social-img {
-            width: 2rem;
+            width: 3rem;
             padding: 10px;
             box-shadow: 10px, 10px, 10px, 1px, #fff;
-            margin-bottom: 10px;
         }
     }
 

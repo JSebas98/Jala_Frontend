@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokedex</title>
+
+    <!-- CSS files -->
+    <link href="dist/min/styles/styles.min.css" rel="stylesheet" type="text/css">
+
+    <!--Bootstrap styles-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+          crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous"></script>
+    <!--LESS styles-->
+    <script src="https://cdn.jsdelivr.net/npm/less@4"></script>
+</head>
+<body>
+    <header class="header">
+        <img id="pokemon-logo" src="imgs/pokemon-logo.png">
+        <div class="dropdown">
+            <button type="button" id="pokedex-btn" data-bs-toggle="dropdown">
+                <img id="pokedex-icon" src="imgs/pokeball.png">
+            </button>
+
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#new-card-modal">Crear Pokemon</a></li>
+            </ul>
+        </div>
+        
+    </header>
+
+    <div class="container" id="pokedex">
+        <!--Here is where all the poke-cards will be dinamically created-->
+    </div>
+
+    <footer class="footer">
+        <div id="trademark">
+            <img id="pokemon-logo-footer" src="imgs/pokemon-logo.png">
+        </div>
+        
+        <div id="social-media">
+            <img class="social-img" src="imgs/facebook.png"/>
+            <img class="social-img" src="imgs/instagram.png"/>
+            <img class="social-img" src="imgs/twitter.png"/>
+            <img class="social-img" src="imgs/youtube.png"/>
+        </div>
+
+        <div id="legal">
+            <p class="footer-txt">Términos de uso</p>
+            <p class="footer-txt">Aviso sobre la privacidad</p>
+            <p class="footer-txt">Cookies</p>
+            <p class="footer-txt">Información legal</p>
+        </div>
+    </footer>
+
+    <div class="modal fade" id="new-card-modal">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add a new Pokemon!</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <label for="new-pokemon-name" class="form-label">Name</label>
+                        <a href="#" role="button" data-bs-toggle="popover" data-bs-trigger="focus"
+                           title="Pokemon's name" data-bs-content="Write your new Pokemon's name.">
+                            <img class="more-info" src="imgs/info.png"/>
+                        </a>
+                        <input type="text" class="form-control" id="new-pokemon-name"/>
+                        <br>
+                        
+                        <label for="new-pokemon-type" class="form-label">Type</label>
+                        <a href="#" role="button" data-bs-toggle="popover" data-bs-trigger="focus"
+                           title="Pokemon's type" data-bs-content="Choose your Pokemon's type from the list.">
+                            <img class="more-info" src="imgs/info.png"/>
+                        </a>
+                        <select class="form-select" id="new-pokemon-type">
+                            <option value="Fire">Fire</option>
+                            <option value="Grass">Grass</option>
+                            <option value="Water">Water</option>
+                            <option value="Lightning">Lightning</option>
+                            <option value="Psychic">Psychic</option>
+                            <option value="Fighting">Fighting</option>
+                            <option value="Colorless">Colorless</option>
+                            <option value="Steel">Steel</option>
+                            <option value="Dark">Dark</option>
+                        </select>
+                        <br>
+
+                        <label for="new-pokemon-image" class="form-label">Main Picture URL</label>
+                        <a href="#" role="button" data-bs-toggle="popover" data-bs-trigger="focus"
+                        title="Pokemon's picture" data-bs-content="Add the link to your new Pokemon's picture.">
+                            <img class="more-info" src="imgs/info.png"/>
+                        </a>
+                        <input type="text" class="form-control" id="new-pokemon-image"/>
+                        <br>
+                        
+                        <label for="new-pokemon-species" class="form-label">Species</label>
+                        <a href="#" role="button" data-bs-toggle="popover" data-bs-trigger="focus"
+                           title="Pokemon's species" data-bs-content="Write your new Pokemon's species.">
+                            <img class="more-info" src="imgs/info.png"/>
+                        </a>
+                        <input type="text" class="form-control" id="new-pokemon-species"/>
+                        <br>
+
+                        <label for="new-pokemon-hp" class="form-label">HP</label>
+                        <a href="#" role="button" data-bs-toggle="popover" data-bs-trigger="focus"
+                           title="Pokemon's Health Points" data-bs-content="Write your new Pokemon's health points. Just write the number.">
+                            <img class="more-info" src="imgs/info.png"/>
+                        </a>
+                        <input type="text" class="form-control" id="new-pokemon-hp"/>
+                        <br>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-success" data-bs-dismiss="modal">Save card</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JSfiles -->
+    <script src="../dist/app.js"></script>
+
+</body>
+</html>

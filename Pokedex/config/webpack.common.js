@@ -7,7 +7,7 @@ const plugins = [
         template: './src/index.html',
     }),
     new MiniCssExtractPlugin({
-        filename: devMode ? '[name].css' : '[name][contenthash].css',
+        filename: devMode ? '[name].css' : 'styles/[name][contenthash].css',
     }),
 ];
 
@@ -26,9 +26,10 @@ module.exports = {
             },
             {
                 test: /\.less$/i,
-                use: [devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
-                'css-loader',
-                'less-loader'],
+                use: [
+                    devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+                    'css-loader',
+                    'less-loader'],
             }
         ],
     },

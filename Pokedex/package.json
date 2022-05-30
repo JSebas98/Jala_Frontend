@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prod": "webpack --config ./config/webpack.prod.js",
+    "prod": "webpack --config ./config/webpack.prod.js --node-env=production",
     "dev": "webpack --config ./config/webpack.dev.js"
   },
   "keywords": [],

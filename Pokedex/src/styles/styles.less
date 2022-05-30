@@ -15,7 +15,7 @@ body {
     "body body body body body"
     "social social social social social"
     "trademark trademark trademark trademark trademark"
-    "legal legal legal legal legal"
+    "legal legal legal legal legal";
 }
 
 header {
@@ -59,10 +59,12 @@ header {
 
 .container {
     display: flex;
+    flex-grow: 1;
     grid-area: body;
     grid-column: @whole-screen;
     flex-wrap: wrap;
     justify-content: space-evenly;
+    justify-self: center;
 
     padding: 15px;
     margin: 0px;

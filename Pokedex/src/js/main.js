@@ -1,11 +1,22 @@
 import _ from 'lodash';
 import '../styles/styles.less';
+import { pokemonColorMap, getPokemonImageUri } from './utils.js';
+import { PokemonCard } from './pokemon-card.js';
+import '../imgs/facebook.png';
+import '../imgs/info.png';
+import '../imgs/info2.png';
+import '../imgs/instagram.png';
+import '../imgs/pokeball.png';
+import '../imgs/pokemon-logo.png';
+import '../imgs/twitter.png';
+import '../imgs/youtube.png';
+
 
 // Initializing popovers
 const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]');
 const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl));
 
-// Fetching from PokeAPI usinf API Fetch}
+// Fetching from PokeAPI using API Fetch
 const offset = 0;
 
 fetch(`https://pokeapi.co/api/v2/pokemon/?offset=${offset}&limit=25`)

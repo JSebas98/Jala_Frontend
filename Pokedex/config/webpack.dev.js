@@ -10,5 +10,8 @@ module.exports = merge(common, {
         assetModuleFilename: 'imgs/[name][ext]',
     },
     devtool: 'eval-cheap-module-source-map',
-    watch: true,
+    devServer: {
+        static: '../src',
+    },
+    //watch: true,
 });

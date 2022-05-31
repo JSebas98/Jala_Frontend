@@ -1,5 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const path = require('path');
 const devMode = process.env.NODE_ENV !== 'production';
 
 const plugins = [
@@ -33,4 +34,11 @@ module.exports = {
             }
         ],
     },
+    resolve: {
+        alias: {
+            Styles: path.resolve(__dirname, '../src/styles'),
+            Images: path.resolve(__dirname, '../src/imgs'),
+            Utils: path.resolve(__dirname, '../src/js'),
+        }
+    }
 }

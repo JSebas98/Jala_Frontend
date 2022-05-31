@@ -1,15 +1,15 @@
 import _ from 'lodash';
-import '../styles/styles.less';
-import { pokemonColorMap, getPokemonImageUri } from './utils.js';
-import { PokemonCard } from './pokemon-card.js';
-import '../imgs/facebook.png';
-import '../imgs/info.png';
-import '../imgs/info2.png';
-import '../imgs/instagram.png';
-import '../imgs/pokeball.png';
-import '../imgs/pokemon-logo.png';
-import '../imgs/twitter.png';
-import '../imgs/youtube.png';
+import 'Styles/styles.less';
+import { pokemonColorMap, getPokemonImageUri } from 'Utils/utils.js';
+import { PokemonCard } from 'Utils/pokemon-card.js';
+import 'Images/facebook.png';
+import 'Images/info.png';
+import 'Images/info2.png';
+import 'Images/instagram.png';
+import 'Images/pokeball.png';
+import 'Images/pokemon-logo.png';
+import 'Images/twitter.png';
+import 'Images/youtube.png';
 
 
 // Initializing popovers

@@ -7,7 +7,7 @@ module.exports = merge(common, {
     output: {
         filename: '[name].[fullhash].js',
         path: path.resolve(__dirname, '../build'),
-        assetModuleFilename: 'imgs/[name][ext]',
+        assetModuleFilename: 'imgs/[name][contenthash][ext]',
     },
     devtool: 'source-map',
 });

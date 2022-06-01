@@ -2,15 +2,44 @@ import _ from 'lodash';
 import 'Styles/styles.less';
 import { pokemonColorMap, getPokemonImageUri } from 'Utils/utils.js';
 import { PokemonCard } from 'Utils/pokemon-card.js';
-import 'Images/facebook.png';
-import 'Images/info.png';
-import 'Images/info2.png';
-import 'Images/instagram.png';
-import 'Images/pokeball.png';
-import 'Images/pokemon-logo.png';
-import 'Images/twitter.png';
-import 'Images/youtube.png';
+import FacebookLogo from 'Images/facebook.png';
+import InfoIcon from 'Images/info.png';
+import InstagramLogo from 'Images/instagram.png';
+import Pokeball from 'Images/pokeball.png';
+import PokemonLogo from 'Images/pokemon-logo.png';
+import TwitterLogo from 'Images/twitter.png';
+import YouTubeLogo from 'Images/youtube.png';
 
+
+function loadImages() {
+    let pokemonLogo = document.getElementById("pokemon-logo");
+    pokemonLogo.src = PokemonLogo;
+
+    let pokedexIcon = document.getElementById("pokedex-icon");
+    pokedexIcon.src = Pokeball;
+
+    let pokemonLogoFooter = document.getElementById("pokemon-logo-footer");
+    pokemonLogoFooter.src = PokemonLogo;
+    
+    let facebookLogo = document.getElementById("facebook");
+    facebookLogo.src = FacebookLogo;
+
+    let instagramLogo = document.getElementById("instagram");
+    instagramLogo.src = InstagramLogo;
+
+    let twitterLogo = document.getElementById("twitter");
+    twitterLogo.src = TwitterLogo;
+
+    let youtubeLogo = document.getElementById("youtube");
+    youtubeLogo.src = YouTubeLogo;
+
+    let infoIcon = document.getElementsByClassName("more-info");
+    Array.from(infoIcon).forEach((img) => {
+        img.src = InfoIcon;
+    });
+}
+
+loadImages();
 
 // Initializing popovers
 const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]');

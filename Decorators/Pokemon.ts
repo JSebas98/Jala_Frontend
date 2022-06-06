@@ -3,7 +3,7 @@ type Move = {
     power: number
 };
 
-const checkPP = () => {
+const checkPP = (pokemon) => {
   return function (target: Object, key: string, descriptor: PropertyDescriptor) {
       const original = descriptor.value;
 
@@ -29,7 +29,7 @@ class Pokemon {
     this.ppAvailable = ppAvailable;
   };
   
-  @checkPP()
+  @checkPP(this)
   fight(move: Move) {
     console.log(`${this.name} used ${move?.name}!`);
     this.ppAvailable -= 1;

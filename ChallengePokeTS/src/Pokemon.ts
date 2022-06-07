@@ -7,24 +7,88 @@ Pokemon class
 
 List of goals:
   - create a function to get all information of a pokemon from result of getSinglePokemon
-  - get a List of types from a pokemon, assing to a variable called types
-  - get a List of moves from a pokemon, you can only choose 4 moves by pokemon, those moves should be aleatory
+  - CHECK - get a List of types from a pokemon, assing to a variable called types
+  - CHECK - get a List of moves from a pokemon, you can only choose 4 moves by pokemon, those moves should be aleatory
   - fill Moves with missing data from Types you can get the information from url of the move.
-  - re-write decortator to get new pokemons Ids in PokemonTrainer class 
+  - re-write decortator to get new pokemons Ids in PokemonTrainer class randomly
 */
 export async function getSinglePokemon(id: PokemonId) {
   return await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
 }
 
+export async function getSingleMove(url: string) {
+  return await axios.get(url);
+}
+
 export function getInfoPokemon(id: PokemonId) {
-  const pokemonData = getSinglePokemon(id);
-  
-  const name = pokemonData.then((res) => {
-    return res.data.name;
+  const pokemonRawData = getSinglePokemon(id);
+
+  pokemonRawData.then((res) => {
+    const pokemonInfo = {
+      name: '',
+      id: 0,
+      moves: [],
+      types: []
+    };
+    const types = res.data.types;
+    const processedTypes = getPokemonTypes(types);
+
+    const moves = res.data.moves;
+    const processedMoves = getRandomPokemonMoves(moves);
+
+    pokemonInfo.name = res.data.name;
+    pokemonInfo.id = res.data.id;
+    pokemonInfo.moves = processedMoves;
+    pokemonInfo.types = processedTypes;
+
+    console.log(pokemonInfo);
+
+    return pokemonInfo;
+  })
+  .catch(error => {
+    console.log(error);
+  });
+}
+
+export function getPokemonTypes(types: any) {
+  const pokemonTypes: Type[] = [];
+
+  types.forEach(type => {
+    pokemonTypes.push(type.type);
   });
 
-  console.log(name);
+  return pokemonTypes;
+}
 
+export function getRandomPokemonMoves(moves: any) {
+  const pokemonMoves: Move[] = [];
+  
+  moves.forEach(move => {
+    pokemonMoves.push(move.move);
+  });
+
+  const filteredPokemonMoves: Move[] = [];
+  const randomIndexes: number[] = getRandomIndexes(moves.length);
+
+  for(let i=0; i<randomIndexes.length; i++) {
+    const moveIndex = randomIndexes[i];
+    filteredPokemonMoves.push(pokemonMoves[moveIndex]);
+  }
+  
+  return filteredPokemonMoves;
+}
+
+export function getRandomIndexes(max: number): number[] {
+  const randomIndexes: number[] = [];
+
+  while (randomIndexes.length < 4) {
+    const randomNum = Math.floor(Math.random() * (max));
+    if (randomIndexes.indexOf(randomNum) === -1) {
+      randomIndexes.push(randomNum);
+    }
+  }
+
+  return randomIndexes;
 }
 
 function getNewPokemons<T extends { new(...args: any[]): {} }>(constructor: T) {
@@ -62,18 +126,38 @@ export class Pokemon {
   buildFieldsPokemon(pokemon: any) {
     this.name = pokemon.name;
     this.id = pokemon.id;
-    // you can only choose four moves from the list of moves
-    // this.moves = someFn(pokemon.moves);
+    this.types = getPokemonTypes(pokemon.types);
+    this.getFullPokemonMoves(pokemon.moves);
+  }
+
+  async getFullPokemonMoves(moves: Move[]) {
+    const baseMoves: Move[] = getRandomPokemonMoves(moves);
+    const listMoves = baseMoves.map(move => getSingleMove(move.url));
+    const results = await Promise.all(listMoves);
+    results.forEach((result, i) => {
+      const fullMove = {
+        name: result.data.name,
+        url: baseMoves[i].url,
+        type: result.data.type,
+        damage: result.data.power,
+        powerPoints: result.data.pp,
+        accuracy: result.data.accuracy
+      }
+      
+      this.moves.push(fullMove);
+    });
   }
 
   displayInfo() {
     console.log(`==========================`);
     console.log(`${this.id} ${this.name}`);
+    console.log(`\nTypes:`);
     this.types.forEach(type => {
-      console.log(`${type.name}`);
+      console.log(`- ${type.name}`);
     });
+    console.log(`\nMoves:`);
     this.moves.forEach(move => {
-      console.log(`${move.name}`);
+      console.log(`- ${move.name}`);
     });
   }
 }

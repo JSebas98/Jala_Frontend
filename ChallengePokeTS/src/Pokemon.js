@@ -51,7 +51,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.PokemonTrainer = exports.Pokemon = exports.getInfoPokemon = exports.getSinglePokemon = void 0;
+exports.PokemonTrainer = exports.Pokemon = exports.getRandomIndexes = exports.getRandomPokemonMoves = exports.getPokemonTypes = exports.getInfoPokemon = exports.getSingleMove = exports.getSinglePokemon = void 0;
 var axios_1 = require("axios");
 /*
 
@@ -61,10 +61,10 @@ Pokemon class
 
 List of goals:
   - create a function to get all information of a pokemon from result of getSinglePokemon
-  - get a List of types from a pokemon, assing to a variable called types
-  - get a List of moves from a pokemon, you can only choose 4 moves by pokemon, those moves should be aleatory
+  - CHECK - get a List of types from a pokemon, assing to a variable called types
+  - CHECK - get a List of moves from a pokemon, you can only choose 4 moves by pokemon, those moves should be aleatory
   - fill Moves with missing data from Types you can get the information from url of the move.
-  - re-write decortator to get new pokemons Ids in PokemonTrainer class
+  - re-write decortator to get new pokemons Ids in PokemonTrainer class randomly
 */
 function getSinglePokemon(id) {
     return __awaiter(this, void 0, void 0, function () {
@@ -77,14 +77,75 @@ function getSinglePokemon(id) {
     });
 }
 exports.getSinglePokemon = getSinglePokemon;
-function getInfoPokemon(id) {
-    var pokemonData = getSinglePokemon(id);
-    var name = pokemonData.then(function (res) {
-        return res.data.name;
+function getSingleMove(url) {
+    return __awaiter(this, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, axios_1.default.get(url)];
+                case 1: return [2 /*return*/, _a.sent()];
+            }
+        });
     });
-    console.log(name);
+}
+exports.getSingleMove = getSingleMove;
+function getInfoPokemon(id) {
+    var pokemonRawData = getSinglePokemon(id);
+    pokemonRawData.then(function (res) {
+        var pokemonInfo = {
+            name: '',
+            id: 0,
+            moves: [],
+            types: []
+        };
+        var types = res.data.types;
+        var processedTypes = getPokemonTypes(types);
+        var moves = res.data.moves;
+        var processedMoves = getRandomPokemonMoves(moves);
+        pokemonInfo.name = res.data.name;
+        pokemonInfo.id = res.data.id;
+        pokemonInfo.moves = processedMoves;
+        pokemonInfo.types = processedTypes;
+        console.log(pokemonInfo);
+        return pokemonInfo;
+    })
+        .catch(function (error) {
+        console.log(error);
+    });
 }
 exports.getInfoPokemon = getInfoPokemon;
+function getPokemonTypes(types) {
+    var pokemonTypes = [];
+    types.forEach(function (type) {
+        pokemonTypes.push(type.type);
+    });
+    return pokemonTypes;
+}
+exports.getPokemonTypes = getPokemonTypes;
+function getRandomPokemonMoves(moves) {
+    var pokemonMoves = [];
+    moves.forEach(function (move) {
+        pokemonMoves.push(move.move);
+    });
+    var filteredPokemonMoves = [];
+    var randomIndexes = getRandomIndexes(moves.length);
+    for (var i = 0; i < randomIndexes.length; i++) {
+        var moveIndex = randomIndexes[i];
+        filteredPokemonMoves.push(pokemonMoves[moveIndex]);
+    }
+    return filteredPokemonMoves;
+}
+exports.getRandomPokemonMoves = getRandomPokemonMoves;
+function getRandomIndexes(max) {
+    var randomIndexes = [];
+    while (randomIndexes.length < 4) {
+        var randomNum = Math.floor(Math.random() * (max));
+        if (randomIndexes.indexOf(randomNum) === -1) {
+            randomIndexes.push(randomNum);
+        }
+    }
+    return randomIndexes;
+}
+exports.getRandomIndexes = getRandomIndexes;
 function getNewPokemons(constructor) {
     return /** @class */ (function (_super) {
         __extends(class_1, _super);
@@ -105,19 +166,59 @@ var Pokemon = /** @class */ (function () {
         this.buildFieldsPokemon(pokemonResult);
     }
     Pokemon.prototype.buildFieldsPokemon = function (pokemon) {
-        this.name = pokemon.name;
-        this.id = pokemon.id;
-        // you can only choose four moves from the list of moves
-        // this.moves = someFn(pokemon.moves);
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        this.name = pokemon.name;
+                        this.id = pokemon.id;
+                        this.types = getPokemonTypes(pokemon.types);
+                        return [4 /*yield*/, this.getFullPokemonMoves(pokemon.moves)];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    Pokemon.prototype.getFullPokemonMoves = function (moves) {
+        return __awaiter(this, void 0, void 0, function () {
+            var baseMoves, listMoves, results;
+            var _this = this;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        baseMoves = getRandomPokemonMoves(moves);
+                        listMoves = baseMoves.map(function (move) { return getSingleMove(move.url); });
+                        return [4 /*yield*/, Promise.all(listMoves)];
+                    case 1:
+                        results = _a.sent();
+                        results.forEach(function (result, i) {
+                            var fullMove = {
+                                name: result.data.name,
+                                url: baseMoves[i].url,
+                                type: result.data.type,
+                                damage: result.data.power,
+                                powerPoints: result.data.pp,
+                                accuracy: result.data.accuracy
+                            };
+                            _this.moves.push(fullMove);
+                        });
+                        return [2 /*return*/];
+                }
+            });
+        });
     };
     Pokemon.prototype.displayInfo = function () {
         console.log("==========================");
         console.log("".concat(this.id, " ").concat(this.name));
+        console.log("\nTypes:");
         this.types.forEach(function (type) {
-            console.log("".concat(type.name));
+            console.log("- ".concat(type.name));
         });
+        console.log("\nMoves:");
         this.moves.forEach(function (move) {
-            console.log("".concat(move.name));
+            console.log("- ".concat(move.name));
         });
     };
     return Pokemon;

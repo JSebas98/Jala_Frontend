@@ -88,12 +88,16 @@ export function getRandomNumbers(quantity: number, max: number): number[] {
 
   while (randomNumbers.length < quantity) {
     const randomNum = Math.floor(Math.random() * (max));
-    if (randomNumbers.indexOf(randomNum) === -1 && randomNum !== 0) {
+    if (isRandomNumberValid(randomNumbers, randomNum)) {
       randomNumbers.push(randomNum);
     }
   }
 
   return randomNumbers;
+}
+
+export function isRandomNumberValid(randomNumbers: number[], randomNum: number) {
+  return randomNumbers.indexOf(randomNum) === -1 && randomNum !== 0;
 }
 
 function getNewPokemons<T extends { new(...args: any[]): {} }>(constructor: T) {

@@ -60,7 +60,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.PokemonTrainer = exports.Pokemon = exports.getRandomNumbers = exports.getRandomPokemonMoves = exports.getPokemonTypes = exports.getInfoPokemon = exports.getSingleMove = exports.getSinglePokemon = void 0;
+exports.PokemonTrainer = exports.Pokemon = exports.isRandomNumberValid = exports.getRandomNumbers = exports.getRandomPokemonMoves = exports.getPokemonTypes = exports.getInfoPokemon = exports.getSingleMove = exports.getSinglePokemon = void 0;
 var axios_1 = require("axios");
 /*
 
@@ -151,13 +151,17 @@ function getRandomNumbers(quantity, max) {
     var randomNumbers = [];
     while (randomNumbers.length < quantity) {
         var randomNum = Math.floor(Math.random() * (max));
-        if (randomNumbers.indexOf(randomNum) === -1 && randomNum !== 0) {
+        if (isRandomNumberValid(randomNumbers, randomNum)) {
             randomNumbers.push(randomNum);
         }
     }
     return randomNumbers;
 }
 exports.getRandomNumbers = getRandomNumbers;
+function isRandomNumberValid(randomNumbers, randomNum) {
+    return randomNumbers.indexOf(randomNum) === -1 && randomNum !== 0;
+}
+exports.isRandomNumberValid = isRandomNumberValid;
 function getNewPokemons(constructor) {
     return /** @class */ (function (_super) {
         __extends(class_1, _super);

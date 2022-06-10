@@ -12,6 +12,11 @@ List of goals:
   - fill Moves with missing data from Types you can get the information from url of the move.
   - re-write decortator to get new pokemons Ids in PokemonTrainer class randomly
 */
+
+const POKEMON_MOVES = 4;
+const TEAM_SIZE = 3;
+const NUMBER_OF_POKEMONS = 500;
+
 export async function getSinglePokemon(id: PokemonId) {
   return await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
 }
@@ -68,7 +73,7 @@ export function getRandomPokemonMoves(moves: any) {
   });
 
   const filteredPokemonMoves: Move[] = [];
-  const randomIndexes: number[] = getRandomIndexes(moves.length);
+  const randomIndexes: number[] = getRandomNumbers(POKEMON_MOVES, moves.length);
 
   for(let i=0; i<randomIndexes.length; i++) {
     const moveIndex = randomIndexes[i];
@@ -78,22 +83,22 @@ export function getRandomPokemonMoves(moves: any) {
   return filteredPokemonMoves;
 }
 
-export function getRandomIndexes(max: number): number[] {
-  const randomIndexes: number[] = [];
+export function getRandomNumbers(quantity: number, max: number): number[] {
+  const randomNumbers: number[] = [];
 
-  while (randomIndexes.length < 4) {
+  while (randomNumbers.length < quantity) {
     const randomNum = Math.floor(Math.random() * (max));
-    if (randomIndexes.indexOf(randomNum) === -1) {
-      randomIndexes.push(randomNum);
+    if (randomNumbers.indexOf(randomNum) === -1 && randomNum !== 0) {
+      randomNumbers.push(randomNum);
     }
   }
 
-  return randomIndexes;
+  return randomNumbers;
 }
 
 function getNewPokemons<T extends { new(...args: any[]): {} }>(constructor: T) {
   return class extends constructor {
-    listOfIds = [1,2,3];
+    listOfIds = getRandomNumbers(TEAM_SIZE, NUMBER_OF_POKEMONS);
   }
 }
 
@@ -127,7 +132,7 @@ export class Pokemon {
     this.name = pokemon.name;
     this.id = pokemon.id;
     this.types = getPokemonTypes(pokemon.types);
-    this.getFullPokemonMoves(pokemon.moves);
+    this.moves = getRandomPokemonMoves(pokemon.moves);
   }
 
   async getFullPokemonMoves(moves: Move[]) {
@@ -162,10 +167,11 @@ export class Pokemon {
   }
 }
 
+@getNewPokemons
 export class PokemonTrainer {
   name: string;
   pokemons: Pokemon[] = [];
-  listOfIds: number[] = [2,4];
+  listOfIds: number[] = [2, 4];
   constructor(name: string) {
     this.name = name;
   }

@@ -14,6 +14,15 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -51,7 +60,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.PokemonTrainer = exports.Pokemon = exports.getRandomIndexes = exports.getRandomPokemonMoves = exports.getPokemonTypes = exports.getInfoPokemon = exports.getSingleMove = exports.getSinglePokemon = void 0;
+exports.PokemonTrainer = exports.Pokemon = exports.getRandomNumbers = exports.getRandomPokemonMoves = exports.getPokemonTypes = exports.getInfoPokemon = exports.getSingleMove = exports.getSinglePokemon = void 0;
 var axios_1 = require("axios");
 /*
 
@@ -66,6 +75,9 @@ List of goals:
   - fill Moves with missing data from Types you can get the information from url of the move.
   - re-write decortator to get new pokemons Ids in PokemonTrainer class randomly
 */
+var POKEMON_MOVES = 4;
+var TEAM_SIZE = 3;
+var NUMBER_OF_POKEMONS = 500;
 function getSinglePokemon(id) {
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_a) {
@@ -127,7 +139,7 @@ function getRandomPokemonMoves(moves) {
         pokemonMoves.push(move.move);
     });
     var filteredPokemonMoves = [];
-    var randomIndexes = getRandomIndexes(moves.length);
+    var randomIndexes = getRandomNumbers(POKEMON_MOVES, moves.length);
     for (var i = 0; i < randomIndexes.length; i++) {
         var moveIndex = randomIndexes[i];
         filteredPokemonMoves.push(pokemonMoves[moveIndex]);
@@ -135,23 +147,23 @@ function getRandomPokemonMoves(moves) {
     return filteredPokemonMoves;
 }
 exports.getRandomPokemonMoves = getRandomPokemonMoves;
-function getRandomIndexes(max) {
-    var randomIndexes = [];
-    while (randomIndexes.length < 4) {
+function getRandomNumbers(quantity, max) {
+    var randomNumbers = [];
+    while (randomNumbers.length < quantity) {
         var randomNum = Math.floor(Math.random() * (max));
-        if (randomIndexes.indexOf(randomNum) === -1) {
-            randomIndexes.push(randomNum);
+        if (randomNumbers.indexOf(randomNum) === -1 && randomNum !== 0) {
+            randomNumbers.push(randomNum);
         }
     }
-    return randomIndexes;
+    return randomNumbers;
 }
-exports.getRandomIndexes = getRandomIndexes;
+exports.getRandomNumbers = getRandomNumbers;
 function getNewPokemons(constructor) {
     return /** @class */ (function (_super) {
         __extends(class_1, _super);
         function class_1() {
             var _this = _super !== null && _super.apply(this, arguments) || this;
-            _this.listOfIds = [1, 2, 3];
+            _this.listOfIds = getRandomNumbers(TEAM_SIZE, NUMBER_OF_POKEMONS);
             return _this;
         }
         return class_1;
@@ -166,20 +178,10 @@ var Pokemon = /** @class */ (function () {
         this.buildFieldsPokemon(pokemonResult);
     }
     Pokemon.prototype.buildFieldsPokemon = function (pokemon) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        this.name = pokemon.name;
-                        this.id = pokemon.id;
-                        this.types = getPokemonTypes(pokemon.types);
-                        return [4 /*yield*/, this.getFullPokemonMoves(pokemon.moves)];
-                    case 1:
-                        _a.sent();
-                        return [2 /*return*/];
-                }
-            });
-        });
+        this.name = pokemon.name;
+        this.id = pokemon.id;
+        this.types = getPokemonTypes(pokemon.types);
+        this.moves = getRandomPokemonMoves(pokemon.moves);
     };
     Pokemon.prototype.getFullPokemonMoves = function (moves) {
         return __awaiter(this, void 0, void 0, function () {
@@ -265,6 +267,10 @@ var PokemonTrainer = /** @class */ (function () {
             });
         });
     };
+    PokemonTrainer = __decorate([
+        getNewPokemons,
+        __metadata("design:paramtypes", [String])
+    ], PokemonTrainer);
     return PokemonTrainer;
 }());
 exports.PokemonTrainer = PokemonTrainer;

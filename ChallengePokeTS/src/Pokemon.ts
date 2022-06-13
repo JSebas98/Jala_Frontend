@@ -21,8 +21,8 @@ export async function getSinglePokemon(id: PokemonId) {
   return await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
 }
 
-export async function getSingleMove(url: string) {
-  return await axios.get(url);
+export function getSingleMove(url: string) {
+  return axios.get(url);
 }
 
 export function getInfoPokemon(id: PokemonId) {

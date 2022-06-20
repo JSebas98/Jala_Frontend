@@ -1,0 +1,11 @@
+<section id="pokedex">
+    <div class="pokecard" *ngFor="let pokecard of pokeCardList">
+        <div class="image-container">
+            <img [src]="pokecard.image" class="pokemon-image">
+        </div>
+        <div class="name-container">
+            <p class="pokemon-name">{{ pokecard.name }}</p>
+        </div>
+    </div>
+</section>
+

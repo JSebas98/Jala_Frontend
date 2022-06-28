@@ -1,18 +1,15 @@
 import { Component, OnInit } from "@angular/core";
-import { dataPokemons, getPokemonImageUri, pokemonColorMap } from '../../shared/utils';
+import { PokeCard } from "src/app/utils/types";
+import { dataPokemons, getPokemonImageUri, pokemonColorMap } from '../../../utils/utils';
 
-type PokeCard = {
-    name: string,
-    image: string,
-    color: string
-}
+
 
 @Component({
     selector: 'pokecard-component',
     templateUrl: './pokecard.component.html',
     styleUrls: ['./pokecard.component.scss']
 })
-export class pokecardComponent implements OnInit {
+export class PokecardComponent implements OnInit {
 
     pokeCardList: PokeCard[] = [];
 
@@ -26,7 +23,7 @@ export class pokecardComponent implements OnInit {
             this.pokeCardList.push({
                 name: pokemon.name,
                 image: getPokemonImageUri(index),
-                color: pokemonColorMap[1]
+                color: pokemonColorMap[index.toString()]
             });
         })
     }

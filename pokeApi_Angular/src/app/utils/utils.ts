@@ -1,4 +1,4 @@
-export const pokemonColorMap = {
+export const pokemonColorMap: { [key: string]: string } = {
     "1": "#4ca04c",//green
     "2": "#4ca04c",
     "3": "#4ca04c",

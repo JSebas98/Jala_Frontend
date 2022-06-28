@@ -1,20 +1,18 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
+// import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { pokedexComponent } from './components/pokedex-component/pokedex.component';
-import { pokecardComponent } from './components/pokecard-component/pokecard.component';
+import { PokemonModule } from './pokemons/pokemon.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    pokedexComponent,
-    pokecardComponent
+    AppComponent
   ],
   imports: [
-    BrowserModule,
-    AppRoutingModule
+    PokemonModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

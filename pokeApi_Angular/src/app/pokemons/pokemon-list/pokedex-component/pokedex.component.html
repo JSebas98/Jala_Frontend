@@ -1,5 +1,10 @@
 <section class="pokedex">
     <header class="header">
+        <div class="search">
+            <span>Search:</span>
+            <input [(ngModel)]="search" type="text" (ngModelChange)="searchPokemons()">
+            {{ search }}
+        </div>
     </header>
     <section class="main">
         <pokecard-component></pokecard-component>

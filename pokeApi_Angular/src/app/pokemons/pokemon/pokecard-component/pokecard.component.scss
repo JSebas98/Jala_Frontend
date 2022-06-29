@@ -1,23 +1,13 @@
-#pokedex {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    flex-wrap: wrap;
+// .pokecard {
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     flex-direction: column;
 
-    margin: 0px;
-    padding: 10px;
-}
-
-.pokecard {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-
-    background-color: chocolate;
-    margin: 10px;
-    border-radius: 20px;
-}
+//     background-color: chocolate;
+//     margin: 10px;
+//     border-radius: 20px;
+// }
 
 .pokemon-name {
     color: #fff;

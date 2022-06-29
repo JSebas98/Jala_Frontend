@@ -1,11 +1,6 @@
-<section id="pokedex">
-    <div class="pokecard" *ngFor="let pokecard of pokeCardList">
-        <div class="image-container">
-            <img [src]="pokecard.image" class="pokemon-image">
-        </div>
-        <div class="name-container">
-            <p class="pokemon-name">{{ pokecard.name }}</p>
-        </div>
-    </div>
-</section>
-
+<div class="pokecard"
+    [ngStyle] = "{'background-color': pokeCard.color}">
+    <p class="card-number">{{ pokeCard.id }}</p>
+    <img [src]="pokeCard.image" class="pokemon-image">
+    <p class="pokemon-name">{{ pokeCard.name }}</p>
+</div>

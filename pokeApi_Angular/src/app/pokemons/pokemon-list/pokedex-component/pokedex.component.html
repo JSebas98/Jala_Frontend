@@ -1,4 +1,4 @@
-<section class="pokedex">
+<div class="pokedex">
     <header class="header">
         <div class="search">
             <span>Search:</span>
@@ -6,10 +6,13 @@
             {{ search }}
         </div>
     </header>
-    <section class="main">
-        <pokecard-component></pokecard-component>
-    </section>
+    <div class="main">
+        <pokecard-component
+            *ngFor="let pokecard of pokecardFullList"
+            [pokeCard]="pokecard">
+        </pokecard-component>
+    </div>
 
     <footer class="footer">
     </footer>
-</section>
+</div>

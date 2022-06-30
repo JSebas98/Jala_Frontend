@@ -1,6 +1,9 @@
 <div class="pokecard"
-    [ngStyle] = "{'background-color': pokeCard.color}">
+    [ngStyle] = "{'background-color': pokeCard.color}"
+    (click)="goToPokemonProfile()">
+
     <p class="card-number">{{ pokeCard.id }}</p>
     <img [src]="pokeCard.image" class="pokemon-image">
     <p class="pokemon-name">{{ pokeCard.name }}</p>
+
 </div>

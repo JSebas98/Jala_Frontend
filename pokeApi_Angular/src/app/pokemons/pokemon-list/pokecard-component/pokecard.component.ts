@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 import { PokeCard } from "src/app/utils/types";
 import { dataPokemons, getPokemonImageUri, pokemonColorMap } from '../../../utils/utils';
 
@@ -9,7 +10,13 @@ import { dataPokemons, getPokemonImageUri, pokemonColorMap } from '../../../util
 })
 export class PokecardComponent {
 
+    constructor(private router: Router) {}
+
     @Input()
     pokeCard!: PokeCard;
+
+    goToPokemonProfile() {
+        this.router.navigate([`/pokedex/${this.pokeCard.id}`]);
+    }
 
 }

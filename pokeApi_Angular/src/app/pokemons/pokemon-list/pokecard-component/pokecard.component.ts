@@ -10,13 +10,26 @@ import { dataPokemons, getPokemonImageUri, pokemonColorMap } from '../../../util
 })
 export class PokecardComponent {
 
-    constructor(private router: Router) {}
+    constructor(private router: Router) { }
 
     @Input()
     pokeCard!: PokeCard;
 
+    background!: string;
+
     goToPokemonProfile() {
         this.router.navigate([`/pokedex/${this.pokeCard.id}`]);
+    }
+
+    setTextColor() {
+        this.background = this.pokeCard.color;
+        switch(this.background) {
+            case '#fbf6f6':
+            case '#f0f060e6':
+                return 'black';
+            default:
+                return 'white'; 
+        }
     }
 
 }

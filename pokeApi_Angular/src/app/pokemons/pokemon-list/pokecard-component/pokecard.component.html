@@ -2,8 +2,14 @@
     [ngStyle] = "{'background-color': pokeCard.color}"
     (click)="goToPokemonProfile()">
 
-    <p class="card-number">{{ pokeCard.id }}</p>
+    <p class="card-number"
+    [ngStyle] = "{'color': setTextColor()}">
+        {{ pokeCard.id }}
+    </p>
     <img [src]="pokeCard.image" class="pokemon-image">
-    <p class="pokemon-name">{{ pokeCard.name }}</p>
+    <p class="pokemon-name"
+    [ngStyle] = "{'color': setTextColor()}">
+        {{ pokeCard.name }}
+    </p>
 
 </div>

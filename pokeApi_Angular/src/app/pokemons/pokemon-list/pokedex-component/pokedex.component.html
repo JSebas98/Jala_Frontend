@@ -1,17 +1,40 @@
 <div class="pokedex">
     <header class="header">
         <div class="search">
-            <span>Search:</span>
-            <input [(ngModel)]="search" type="text" (ngModelChange)="searchPokemons()">
-            {{ search }}
+            <span class="label">Search:</span>
+            <input
+                [(ngModel)]="search"
+                type="text"
+                (ngModelChange)="searchPokemons()"
+                class="field"
+                placeholder="Search pokemon..."
+            />
+                
         </div>
     </header>
-    <div class="main">
+    <div class="main" *ngIf="search===''; else searchResults">
         <pokecard-component
             *ngFor="let pokecard of pokecardFullList"
             [pokeCard]="pokecard">
         </pokecard-component>
     </div>
+    <ng-template #searchResults>
+        <div class="results">
+            <pokecard-component
+                *ngFor="let pokecard of pokecardFilteredList"
+                [pokeCard]="pokecard">
+            </pokecard-component>
+            <div id="no-results" *ngIf="pokecardFilteredList.length === 0">
+                <div id="no-results-image">
+                    <img src="../../../../assets/no-results-image.png" class="no-results-img"/>
+                </div>
+                <div id="no-results-info">
+                    <h2 class="no-results-title">Oops! No results for '{{search}}'</h2>
+                    <p class="no-results-text">Try again with another Pokemon!</p>
+                </div>
+            </div>
+        </div>
+    </ng-template>
 
     <footer class="footer">
     </footer>

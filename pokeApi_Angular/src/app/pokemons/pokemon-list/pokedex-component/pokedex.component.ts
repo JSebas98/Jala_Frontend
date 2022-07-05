@@ -11,8 +11,8 @@ import { PokemonService } from '../../pokemon.service';
 export class PokedexComponent implements OnInit {
 
     pokecardFullList: PokeCard[] = [];
-    pokemonRawList: Pokemon[] = [];
-    limit: number = 25;
+    pokecardFilteredList: PokeCard[] = [];
+    limit: number = 50;
     offset: number = 0;
     search: string = '';
 
@@ -23,10 +23,9 @@ export class PokedexComponent implements OnInit {
             .subscribe(
                 (data: {results: Pokemon[]}) => {
                     this.pokecardFullList = this.createPokeCardsFromResult(data);
-                    // this.pokemonRawList = [...this.pokemonRawList, ...data.results];
                 });
         this.offset += this.limit;
-
+        console.log(this.pokecardFilteredList.length);
     }
 
     createPokeCardsFromResult(data: {results: Pokemon[]}) {
@@ -52,6 +51,7 @@ export class PokedexComponent implements OnInit {
     } 
 
     searchPokemons() {
-        return ;
+        this.pokecardFilteredList = this.pokecardFullList.slice();
+        this.pokecardFilteredList = this.pokecardFilteredList.filter(pokecard => pokecard.name.includes(this.search));
     }
 }

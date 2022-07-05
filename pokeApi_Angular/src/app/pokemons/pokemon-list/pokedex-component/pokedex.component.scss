@@ -7,8 +7,57 @@
     padding: 10px;
 }
 
+.pokedex > .header > .search > .label {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1rem;
+    font-weight: 550;
+}
+
+.pokedex > .header > .search > .field {
+    border-radius: 5px;
+    border: 1px solid grey;
+    height: 1.5rem;
+    width: 20%;
+    margin: 0px 0px 10px 10px;
+}
+
 .pokedex > .main {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
+}
+
+.pokedex > .results {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+#no-results {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+}
+
+#no-results > #no-results-image {
+    display: flex;
+    justify-content: center;
+}
+
+#no-results > #no-results-image > .no-results-img {
+    height: 20rem;
+    width: 25rem;
+}
+
+#no-results > #no-results-info > .no-results-title {
+    font-size: 3rem;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-align: center;
+    margin-bottom: 0;
+}
+
+#no-results > #no-results-info > .no-results-text {
+    font-size: 1.5rem;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-align: center;
 }

@@ -1,15 +1,19 @@
 <div class="pokedex">
     <header class="header">
         <div class="search">
-            <span class="label">Search:</span>
+            <p class="label">Search:</p>
             <input
                 [(ngModel)]="search"
                 type="text"
                 (ngModelChange)="searchPokemons()"
                 class="field"
                 placeholder="Search pokemon..."
-            />
-                
+            /> 
+        </div>
+        <div class="pages">
+            <button class="page-button" (click)="loadNextPage(0)">1</button>
+            <button class="page-button" (click)="loadNextPage(1)">2</button>
+            <button class="page-button" (click)="loadNextPage(2)">3</button>
         </div>
     </header>
     <div class="main" *ngIf="search===''; else searchResults">

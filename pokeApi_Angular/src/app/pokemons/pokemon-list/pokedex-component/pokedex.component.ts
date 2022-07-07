@@ -19,16 +19,19 @@ export class PokedexComponent implements OnInit {
     constructor(private pokemonService: PokemonService) {}
 
     ngOnInit(): void {
+        this.retrievePokemonList();
+    }
+
+    public retrievePokemonList(): void {
         this.pokemonService.getPokemonList(this.offset, this.limit)
             .subscribe(
                 (data: {results: Pokemon[]}) => {
                     this.pokecardFullList = this.createPokeCardsFromResult(data);
                 });
         this.offset += this.limit;
-        console.log(this.pokecardFilteredList.length);
     }
 
-    createPokeCardsFromResult(data: {results: Pokemon[]}) {
+    private createPokeCardsFromResult(data: {results: Pokemon[]}): PokeCard[] {
         return data.results
             .map((pokemon) => {
                 const id: string = this.getPokemonIdFromUrl(pokemon.url);
@@ -41,17 +44,22 @@ export class PokedexComponent implements OnInit {
             });
     }
 
-    getPokemonIdFromUrl(url: string): string {
+    private getPokemonIdFromUrl(url: string): string {
         const id: string = url.split('/')[6];
         return id;
     }
 
-    formatId(id: string): string {
+    private formatId(id: string): string {
         return ('00' + id).slice(-3);
     } 
 
-    searchPokemons() {
+    public searchPokemons(): void {
         this.pokecardFilteredList = this.pokecardFullList.slice();
         this.pokecardFilteredList = this.pokecardFilteredList.filter(pokecard => pokecard.name.includes(this.search));
+    }
+
+    public loadNextPage(number: number): void {
+        this.offset = this.limit * number;
+        this.retrievePokemonList();
     }
 }

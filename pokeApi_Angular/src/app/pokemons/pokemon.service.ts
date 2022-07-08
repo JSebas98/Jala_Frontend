@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
 import { forkJoin, map, Observable } from "rxjs";
-import { BasicStats, Pokemon, PokemonDetails, PokemonProfile, PokemonSpecies } from "../utils/types";
+import { BasicStats, PokemonAPI, PokemonDetails, PokemonProfile, PokemonSpecies } from "../utils/types";
 
 
 @Injectable({
@@ -13,9 +13,9 @@ export class PokemonService {
 
     constructor(private http: HttpClient) {}
 
-    getPokemonList(offset: number = 0, limit: number = 50): Observable<{results: Pokemon[]}> {
+    getPokemonList(offset: number = 0, limit: number = 50): Observable<{results: PokemonAPI[]}> {
         return this.http
-            .get(`${this.API}/pokemon?limit=${limit}&offset=${offset}`) as Observable<{results: Pokemon[]}>;
+            .get(`${this.API}/pokemon?limit=${limit}&offset=${offset}`) as Observable<{results: PokemonAPI[]}>;
     }
 
     getPokemonImageUri(id: number): string {
@@ -46,7 +46,8 @@ export class PokemonService {
                 genus: this.getPokemonGenus(pokemonSpecies),
                 types: this.getPokemonTypes(pokemonDetails),
                 stats: this.getPokemonStats(pokemonDetails),
-                color: pokemonSpecies.color.name
+                color: pokemonSpecies.color.name,
+                image: this.getPokemonImage(pokemonDetails)
             }))
         );
 
@@ -76,6 +77,12 @@ export class PokemonService {
     getPokemonTypes(PokemonDetails: PokemonDetails): string[] {
         return PokemonDetails.types
             .map(type => type.type.name);
+    }
+
+    getPokemonImage(pokemonDetails: PokemonDetails): string {
+        return pokemonDetails.sprites
+            .other["official-artwork"]
+            .front_default;
     }
 
     cleanDuplicateDescriptions(pokemonDescriptions: string[]): string[] {

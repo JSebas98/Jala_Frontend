@@ -1,7 +1,8 @@
 import { Component, OnInit } from "@angular/core";
-import { PokeCard, Pokemon } from "src/app/utils/types";
+import { PokeCard, PokemonAPI } from "src/app/utils/types";
 import { pokemonColorMap } from "src/app/utils/utils";
 import { PokemonService } from '../../pokemon.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'pokedex-component',
@@ -16,22 +17,27 @@ export class PokedexComponent implements OnInit {
     offset: number = 0;
     search: string = '';
 
-    constructor(private pokemonService: PokemonService) {}
+    constructor(
+        private router: ActivatedRoute,
+        private pokemonService: PokemonService) {}
 
     ngOnInit(): void {
         this.retrievePokemonList();
     }
 
     public retrievePokemonList(): void {
-        this.pokemonService.getPokemonList(this.offset, this.limit)
-            .subscribe(
-                (data: {results: Pokemon[]}) => {
-                    this.pokecardFullList = this.createPokeCardsFromResult(data);
-                });
+    //     this.pokemonService.getPokemonList(this.offset, this.limit)
+    //         .subscribe(
+    //             (data: {results: PokemonAPI[]}) => {
+    //                 this.pokecardFullList = this.createPokeCardsFromResult(data);
+    //             });
+    //     this.offset += this.limit;
+        const pokemons = this.router.snapshot.data['pokedex'];
+        this.pokecardFullList = this.createPokeCardsFromResult(pokemons);
         this.offset += this.limit;
     }
 
-    private createPokeCardsFromResult(data: {results: Pokemon[]}): PokeCard[] {
+    private createPokeCardsFromResult(data: {results: PokemonAPI[]}): PokeCard[] {
         return data.results
             .map((pokemon) => {
                 const id: string = this.getPokemonIdFromUrl(pokemon.url);

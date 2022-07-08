@@ -5,7 +5,7 @@ type PokeCard = {
     id: string
 }
 
-type Pokemon = {
+type PokemonAPI = {
     name: string,
     url: string
 }
@@ -22,7 +22,7 @@ type PokemonDetails = {
     species: {},
     sprites: {
         other: {
-            official_artwork: {
+            'official-artwork': {
                 front_default: string
             }
         }
@@ -75,7 +75,8 @@ type PokemonProfile = {
     genus: string,
     types: string[],
     stats: BasicStats[],
-    color: string
+    color: string,
+    image: string
 }
 
 type Language = {
@@ -97,4 +98,4 @@ type BasicStats = {
     stat: string
 }
 
-export {PokeCard, Pokemon, PokemonDetails, PokemonSpecies, PokemonProfile, BasicStats};
+export {PokeCard, PokemonAPI, PokemonDetails, PokemonSpecies, PokemonProfile, BasicStats};

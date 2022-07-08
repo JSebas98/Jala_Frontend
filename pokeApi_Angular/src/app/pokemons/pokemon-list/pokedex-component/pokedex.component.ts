@@ -39,7 +39,7 @@ export class PokedexComponent implements OnInit {
                     name: pokemon.name,
                     image: this.pokemonService.getPokemonImageUri(parseInt(id)),
                     color: pokemonColorMap[id],
-                    id: this.formatId(id)
+                    id: id
                 };
             });
     }
@@ -48,10 +48,6 @@ export class PokedexComponent implements OnInit {
         const id: string = url.split('/')[6];
         return id;
     }
-
-    private formatId(id: string): string {
-        return ('00' + id).slice(-3);
-    } 
 
     public searchPokemons(): void {
         this.pokecardFilteredList = this.pokecardFullList.slice();

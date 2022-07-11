@@ -1,3 +1,5 @@
+import { Observable } from 'rxjs';
+
 type PokeCard = {
     name: string,
     image: string,
@@ -98,4 +100,14 @@ type BasicStats = {
     stat: string
 }
 
-export {PokeCard, PokemonAPI, PokemonDetails, PokemonSpecies, PokemonProfile, BasicStats};
+type resolveResponse<T> = T | Observable<T> | Promise<T>;
+
+export {
+    PokeCard,
+    PokemonAPI,
+    PokemonDetails,
+    PokemonSpecies,
+    PokemonProfile,
+    BasicStats,
+    resolveResponse
+};

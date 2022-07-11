@@ -55,18 +55,18 @@ export class PokemonService {
     }
 
     getPokemonDescription(pokemonSpecies: PokemonSpecies): string[] {
-        const spanishDescriptions: string[] = pokemonSpecies.flavor_text_entries
-            .filter(entry => entry.language.name === 'es')
+        const descriptions: string[] = pokemonSpecies.flavor_text_entries
+            .filter(entry => entry.language.name === 'en')
             .map(entry => entry.flavor_text);
 
-        return this.cleanDuplicateDescriptions(spanishDescriptions);
+        return this.cleanDuplicateDescriptions(descriptions);
     }
 
     getPokemonGenus(pokemonSpecies: PokemonSpecies): string {
-        const spanishGenera = pokemonSpecies.genera
-            .filter(genus => genus.language.name === 'es');
+        const genera = pokemonSpecies.genera
+            .filter(genus => genus.language.name === 'en');
 
-        return spanishGenera[0].genus;
+        return genera[0].genus;
     }
 
     getPokemonStats(pokemonDetails: PokemonDetails): BasicStats[] {

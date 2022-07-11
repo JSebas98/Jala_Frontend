@@ -26,12 +26,6 @@ export class PokedexComponent implements OnInit {
     }
 
     public retrievePokemonList(): void {
-    //     this.pokemonService.getPokemonList(this.offset, this.limit)
-    //         .subscribe(
-    //             (data: {results: PokemonAPI[]}) => {
-    //                 this.pokecardFullList = this.createPokeCardsFromResult(data);
-    //             });
-    //     this.offset += this.limit;
         const pokemons = this.router.snapshot.data['pokedex'];
         this.pokecardFullList = this.createPokeCardsFromResult(pokemons);
         this.offset += this.limit;
@@ -62,6 +56,10 @@ export class PokedexComponent implements OnInit {
 
     public loadNextPage(number: number): void {
         this.offset = this.limit * number;
-        this.retrievePokemonList();
+        this.pokemonService.getPokemonList(this.offset, this.limit)
+            .subscribe(
+                (data: {results: PokemonAPI[]}) => {
+                    this.pokecardFullList = this.createPokeCardsFromResult(data);
+                });
     }
 }

@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
-import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from "@angular/router";
-import { Observable } from "rxjs";
-import { PokemonProfile } from "src/app/utils/types";
+import { ActivatedRouteSnapshot, Resolve } from "@angular/router";
+import { PokemonProfile, resolveResponse } from 'src/app/utils/types';
 import { PokemonService } from '../pokemon.service';
 
 @Injectable({
@@ -10,7 +9,7 @@ import { PokemonService } from '../pokemon.service';
 export class PokemonProfileResolver implements Resolve<PokemonProfile> {
     constructor(private pokemonService: PokemonService) {}
     
-    resolve(route: ActivatedRouteSnapshot): PokemonProfile | Observable<PokemonProfile> | Promise<PokemonProfile> {
+    resolve(route: ActivatedRouteSnapshot): resolveResponse<PokemonProfile> {
         return this.pokemonService.getPokemonProfile(parseInt(route.paramMap.get('id') || '1'));
     }
 }

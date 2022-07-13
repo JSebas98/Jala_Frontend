@@ -100,6 +100,10 @@ type BasicStats = {
     stat: string
 }
 
+type GenerationPokemons = {
+    pokemon_species: PokemonAPI[];
+}
+
 type resolveResponse<T> = T | Observable<T> | Promise<T>;
 
 export {
@@ -109,5 +113,6 @@ export {
     PokemonSpecies,
     PokemonProfile,
     BasicStats,
-    resolveResponse
+    resolveResponse,
+    GenerationPokemons
 };

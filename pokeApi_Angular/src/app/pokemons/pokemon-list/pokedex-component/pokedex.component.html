@@ -29,13 +29,8 @@
                 [pokeCard]="pokecard">
             </pokecard-component>
             <div id="no-results" *ngIf="pokecardFilteredList.length === 0">
-                <div id="no-results-image">
-                    <img src="../../../../assets/no-results-image.png" class="no-results-img"/>
-                </div>
-                <div id="no-results-info">
-                    <h2 class="no-results-title">Oops! No results for '{{search}}'</h2>
-                    <p class="no-results-text">Try again with another Pokemon!</p>
-                </div>
+                <no-content-component
+                [message]="search"></no-content-component>
             </div>
         </div>
     </ng-template>

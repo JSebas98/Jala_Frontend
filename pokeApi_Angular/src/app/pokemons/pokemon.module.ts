@@ -6,12 +6,14 @@ import { PokecardComponent } from './pokemon-list/pokecard-component/pokecard.co
 import { PokemonProfileComponent } from './pokemon/pokemon-profile.component';
 import { PokemonRoutingModule } from './pokemon-routing.module';
 import { CommonModule } from "@angular/common";
+import { NoContentComponent } from "../core/no-content-component/no-content.component";
 
 @NgModule({
     declarations: [
         PokedexComponent,
         PokecardComponent,
-        PokemonProfileComponent
+        PokemonProfileComponent,
+        NoContentComponent
     ],
     imports: [
         CommonModule,

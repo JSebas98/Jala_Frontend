@@ -23,6 +23,7 @@ export class PokedexComponent implements OnInit {
 
     ngOnInit(): void {
         this.retrievePokemonList();
+        this.filterPokemonsByGeneration(1);
     }
 
     public retrievePokemonList(): void {
@@ -61,5 +62,16 @@ export class PokedexComponent implements OnInit {
                 (data: {results: PokemonAPI[]}) => {
                     this.pokecardFullList = this.createPokeCardsFromResult(data);
                 });
+    }
+
+    public filterPokemonsByGeneration(generation: number): void {
+        const pokemonNames: string[] = [];
+        const pokemonsByGeneration = this.pokemonService.getPokemonsByGeneration(generation);
+        pokemonsByGeneration.subscribe((generation) => {
+            generation.pokemon_species
+                .forEach(pokemon => pokemonNames.push(pokemon.name));
+            this.pokecardFilteredList = this.pokecardFullList.slice();
+            this.pokecardFilteredList = this.pokecardFilteredList.filter((pokecard) => pokemonNames.includes(pokecard.name));
+        });
     }
 }

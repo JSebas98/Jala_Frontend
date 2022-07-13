@@ -1,0 +1,36 @@
+.header-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 5rem;
+    box-shadow: 0px 6px 6px rgba(194, 194, 194, 0.5);
+
+    .header-logo {
+        padding-left: 1rem;
+        .logo {
+            width: 10rem;
+        }
+    }
+
+    .header-buttons {
+        display: flex;
+        flex-direction: row;
+        height: inherit;
+        padding-right: 1rem;
+
+        .header-option {
+            width: 7rem;
+            background-color: white;
+            border: none;
+
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 1.25rem;
+
+            &:hover {
+                background-color: rgb(255, 105, 105);
+                color: white;
+            }
+        }
+    }
+}

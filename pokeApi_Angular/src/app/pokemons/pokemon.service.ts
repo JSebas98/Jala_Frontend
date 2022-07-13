@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
 import { forkJoin, map, Observable } from "rxjs";
-import { BasicStats, PokemonAPI, PokemonDetails, PokemonProfile, PokemonSpecies } from "../utils/types";
+import { BasicStats, GenerationPokemons, PokemonAPI, PokemonDetails, PokemonProfile, PokemonSpecies } from "../utils/types";
 
 
 @Injectable({
@@ -52,6 +52,11 @@ export class PokemonService {
         );
 
         return pokemonProfile;
+    }
+
+    getPokemonsByGeneration(generation: number): Observable<GenerationPokemons> {
+        return this.http
+            .get(`https://pokeapi.co/api/v2/generation/${generation}`) as Observable<GenerationPokemons>;
     }
 
     getPokemonDescription(pokemonSpecies: PokemonSpecies): string[] {

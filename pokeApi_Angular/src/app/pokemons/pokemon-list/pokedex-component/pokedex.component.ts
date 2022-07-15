@@ -16,6 +16,8 @@ export class PokedexComponent implements OnInit {
     limit: number = 50;
     offset: number = 0;
     search: string = '';
+    generation = 0;
+    messageGeneration = '';
 
     constructor(
         private router: ActivatedRoute,
@@ -23,7 +25,6 @@ export class PokedexComponent implements OnInit {
 
     ngOnInit(): void {
         this.retrievePokemonList();
-        this.filterPokemonsByGeneration(1);
     }
 
     public retrievePokemonList(): void {
@@ -56,22 +57,29 @@ export class PokedexComponent implements OnInit {
     }
 
     public loadNextPage(number: number): void {
-        this.offset = this.limit * number;
-        this.pokemonService.getPokemonList(this.offset, this.limit)
+        const newOffset = this.limit * number;
+        if(newOffset !== this.offset) {
+            this.offset = newOffset;
+            this.pokemonService.getPokemonList(this.offset, this.limit)
             .subscribe(
                 (data: {results: PokemonAPI[]}) => {
                     this.pokecardFullList = this.createPokeCardsFromResult(data);
                 });
+        }
     }
 
     public filterPokemonsByGeneration(generation: number): void {
-        const pokemonNames: string[] = [];
-        const pokemonsByGeneration = this.pokemonService.getPokemonsByGeneration(generation);
-        pokemonsByGeneration.subscribe((generation) => {
-            generation.pokemon_species
-                .forEach(pokemon => pokemonNames.push(pokemon.name));
-            this.pokecardFilteredList = this.pokecardFullList.slice();
-            this.pokecardFilteredList = this.pokecardFilteredList.filter((pokecard) => pokemonNames.includes(pokecard.name));
-        });
+        this.generation = generation;
+        if(generation > 0) {
+            this.messageGeneration = `generation ${this.generation}.`;
+            const pokemonNames: string[] = [];
+            const pokemonsByGeneration = this.pokemonService.getPokemonsByGeneration(generation);
+            pokemonsByGeneration.subscribe((generation) => {
+                generation.pokemon_species
+                    .forEach(pokemon => pokemonNames.push(pokemon.name));
+                this.pokecardFilteredList = this.pokecardFullList.slice();
+                this.pokecardFilteredList = this.pokecardFilteredList.filter((pokecard) => pokemonNames.includes(pokecard.name));
+            });
+        }
     }
 }

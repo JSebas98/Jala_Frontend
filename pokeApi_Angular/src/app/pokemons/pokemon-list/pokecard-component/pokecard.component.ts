@@ -30,9 +30,4 @@ export class PokecardComponent {
                 return 'white'; 
         }
     }
-
-    whoAmI() {
-        console.log(`I'm a pokecard.`);
-    }
-
 }

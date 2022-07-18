@@ -5,8 +5,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
-import { NoContentComponent } from './core/no-content-component/no-content.component';
 import { HeaderComponent } from './core/header-component/header.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -14,8 +14,9 @@ import { HeaderComponent } from './core/header-component/header.component';
     HeaderComponent
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
+    BrowserModule,
+    FontAwesomeModule,
     HttpClientModule
   ],
   providers: [],

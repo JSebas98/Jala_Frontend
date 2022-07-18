@@ -1,0 +1,12 @@
+<form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+    <h2>Add new pokemon!</h2>
+    <div>
+        <label for="name">Name</label>
+        <input id="name" type="text" formControlName="pokemonName" />
+    </div>
+    <div>
+        <label for="description">Description</label>
+        <input id="description" type="text" formControlName="pokemonDescription" />
+    </div>
+    <button type="submit">Submit</button>
+</form>

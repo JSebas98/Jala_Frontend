@@ -2,8 +2,9 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PokedexComponent } from './pokemon-list/pokedex-component/pokedex.component';
 import { PokedexResolver } from './pokemon-list/pokedex-component/pokedex.resolver';
-import { PokemonProfileComponent } from './pokemon/pokemon-profile.component';
-import { PokemonProfileResolver } from './pokemon/pokemon-profile.resolver';
+import { PokemonAddComponent } from './pokemon/pokemon-add/pokemon-add.component';
+import { PokemonProfileComponent } from './pokemon/pokemon-profile/pokemon-profile.component';
+import { PokemonProfileResolver } from './pokemon/pokemon-profile/pokemon-profile.resolver';
 
 const routes: Routes = [
     { 
@@ -12,6 +13,10 @@ const routes: Routes = [
         resolve: {
             pokedex: PokedexResolver
         }
+    },
+    {
+        path: 'add-pokemon',
+        component: PokemonAddComponent,
     },
     { 
         path: ':id',

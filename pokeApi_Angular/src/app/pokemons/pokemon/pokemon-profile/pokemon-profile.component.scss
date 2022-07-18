@@ -1,0 +1,100 @@
+.options {
+    display: flex;
+
+    button {
+        margin: 20px 5px 0px 5px;
+        padding: 10px;
+
+        border-radius: 10px;
+        border: 2px solid rgb(253, 89, 89);
+        background-color: rgb(255, 105, 105);
+        color: white;
+
+        &:hover {
+            background-color: white;
+            color: rgb(255, 105, 105);
+        }
+    }
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    .pokemon-profile {
+        display: inherit;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        
+        padding: 1rem 3rem 1rem 3rem;
+        gap: 0px 2rem;
+
+        .pokemon-image {
+            height: 20rem;
+            width: 20rem;
+
+            #image {
+                width: inherit;
+                height: inherit;
+            }
+        }
+
+        .pokemon-basic-info {
+            .pokemon-name {
+                #name {
+                    margin-bottom: 2px;
+                }
+                #genus {
+                    margin: 0px;
+                    color: gray;
+                }
+            }
+            .pokemon-types {
+                display: flex;
+                flex-direction: row;
+                padding: 2rem 0px 0.5rem 0px;
+
+                .type-bar {
+                    width: 6rem;
+                    height: 1.5rem;
+                    padding: 8px;
+                    margin-right: 5px;
+                    text-align: center;
+                    text-anchor: middle;
+
+                    border-radius: 10px;
+                    color: white;
+                }
+            }
+            .physical-stats {
+                display: flex;
+                flex-direction: row;
+                padding: 0px 0px 1rem 0px;
+
+                .characteristic {
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    gap: 10px;
+
+                    width: 6rem;
+                    height: 1.5rem;
+                    padding: 8px;
+                    margin-right: 5px;
+
+                    border-radius: 10px;
+                    color: white;
+                    background-color: rgb(255, 140, 0);
+                }
+            }
+
+            .pokemon-description {
+                text-align: justify;
+                font-size: 1.250rem;
+            }
+        }
+    }
+}

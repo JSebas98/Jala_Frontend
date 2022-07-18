@@ -1,7 +1,8 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
 import { forkJoin, map, Observable } from "rxjs";
-import { BasicStats, GenerationPokemons, PokemonAPI, PokemonDetails, PokemonProfile, PokemonSpecies } from "../utils/types";
+import { BasicStats, Description, GenerationPokemons, PokemonAPI, PokemonDetails, PokemonProfile, PokemonSpecies, PokemonType } from "../utils/types";
+import { pokemonTypeColorMap } from "../utils/pokemonColorHash";
 
 
 @Injectable({
@@ -41,8 +42,8 @@ export class PokemonService {
                 id: pokemonDetails.id,
                 name: pokemonDetails.name,
                 description: this.getPokemonDescription(pokemonSpecies),
-                height: pokemonDetails.height,
-                weight: pokemonDetails.weight,
+                height: pokemonDetails.height / 10,
+                weight: pokemonDetails.weight / 10,
                 genus: this.getPokemonGenus(pokemonSpecies),
                 types: this.getPokemonTypes(pokemonDetails),
                 stats: this.getPokemonStats(pokemonDetails),
@@ -59,12 +60,28 @@ export class PokemonService {
             .get(`https://pokeapi.co/api/v2/generation/${generation}`) as Observable<GenerationPokemons>;
     }
 
-    getPokemonDescription(pokemonSpecies: PokemonSpecies): string[] {
-        const descriptions: string[] = pokemonSpecies.flavor_text_entries
-            .filter(entry => entry.language.name === 'en')
+    getPokemonDescription(pokemonSpecies: PokemonSpecies): Description[] {
+        const versions: string[] = ['x', 'y'];
+        const spanishDescriptions: string[] = pokemonSpecies.flavor_text_entries
+            .filter(entry => entry.language.name === 'es' && versions.includes(entry.version.name))
             .map(entry => entry.flavor_text);
 
-        return this.cleanDuplicateDescriptions(descriptions);
+        const descriptions: string[] = pokemonSpecies.flavor_text_entries
+            .filter(entry => entry.language.name === 'en' && versions.includes(entry.version.name))
+            .map(entry => entry.flavor_text);
+
+        const pokemonDescription = [
+            {
+                language: 'en',
+                texts: descriptions
+            },
+            {
+                language: 'es',
+                texts: spanishDescriptions
+            }
+        ]
+
+        return pokemonDescription;
     }
 
     getPokemonGenus(pokemonSpecies: PokemonSpecies): string {
@@ -79,9 +96,11 @@ export class PokemonService {
             .map(stat => ({ base_stat: stat.base_stat, stat: stat.stat.name }));
     }
 
-    getPokemonTypes(PokemonDetails: PokemonDetails): string[] {
+    getPokemonTypes(PokemonDetails: PokemonDetails): PokemonType[] {
         return PokemonDetails.types
-            .map(type => type.type.name);
+            .map(type => ({
+                type: type.type.name,
+                color: pokemonTypeColorMap[type.type.name] ? pokemonTypeColorMap[type.type.name] : 'gray' }))
     }
 
     getPokemonImage(pokemonDetails: PokemonDetails): string {

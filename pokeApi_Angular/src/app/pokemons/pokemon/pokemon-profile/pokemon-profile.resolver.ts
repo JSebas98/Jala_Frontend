@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { ActivatedRouteSnapshot, Resolve } from "@angular/router";
 import { PokemonProfile, resolveResponse } from 'src/app/utils/types';
-import { PokemonService } from '../pokemon.service';
+import { PokemonService } from "../../pokemon.service";
 
 @Injectable({
     providedIn: 'root'

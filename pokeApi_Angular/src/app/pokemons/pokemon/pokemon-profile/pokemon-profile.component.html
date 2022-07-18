@@ -1,0 +1,41 @@
+<div class="options">
+    <button (click)="goBack()">Go back</button>
+    <button (click)="toogleEvolutions()">{{evolutionAction}} evolutions</button>
+</div>
+<div *ngIf="pokemonProfile" class="main-container">
+    <div class="pokemon-profile">
+        <div class="pokemon-image">
+            <img id="image"[src]="pokemonProfile.image"/>
+        </div>
+        <div class="pokemon-basic-info">
+            <div class="pokemon-name">
+                <h2 id="name">#{{ pokemonProfile.id }} {{ pokemonProfile.name |titlecase}}</h2>
+                <h3 id="genus">{{ pokemonProfile.genus }}</h3>
+            </div>
+            <div class="pokemon-types">
+                <span *ngFor="let type of pokemonProfile.types"
+                    [ngStyle]="{'background-color': type.color}"
+                    class="type-bar">{{ type.type |titlecase}}</span>
+            </div>
+            <div class="physical-stats">
+                <div class="characteristic">
+                    <fa-icon [icon]="heightIcon"></fa-icon>
+                    <p>{{ pokemonProfile.height }} m</p>
+                </div>
+                <div class="characteristic">
+                    <fa-icon [icon]="weightIcon"></fa-icon>
+                    <p>{{ pokemonProfile.weight }} kg</p>
+                </div>
+            </div>
+            <div class="pokemon-description">
+                <p *ngFor="let text of pokemonProfile.description[0].texts">{{ text }}</p>
+            </div>
+        </div>
+        <div class="pokemon-stats">
+            <pokemon-stats-chart [pokemonStats]="pokemonProfile.stats"></pokemon-stats-chart>
+        </div>
+    </div>
+    <div class="pokemon-evolutions" *ngIf="evolutionsVisible">
+        <h2>Evolutions</h2>
+    </div>
+</div>

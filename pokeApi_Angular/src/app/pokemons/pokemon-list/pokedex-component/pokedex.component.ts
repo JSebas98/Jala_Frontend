@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { PokeCard, PokemonAPI } from "src/app/utils/types";
-import { pokemonColorMap } from "src/app/utils/utils";
 import { PokemonService } from '../../pokemon.service';
 import { ActivatedRoute } from '@angular/router';
+import { pokemonColorMap } from "src/app/utils/pokemonColorHash";
 
 @Component({
     selector: 'pokedex-component',

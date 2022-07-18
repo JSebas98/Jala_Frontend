@@ -71,11 +71,11 @@ type PokemonSpecies = {
 type PokemonProfile = {
     id: number,
     name: string,
-    description: string[],
+    description: Description[],
     height: number,
     weight: number,
     genus: string,
-    types: string[],
+    types: PokemonType[],
     stats: BasicStats[],
     color: string,
     image: string
@@ -106,6 +106,16 @@ type GenerationPokemons = {
 
 type resolveResponse<T> = T | Observable<T> | Promise<T>;
 
+type Description = {
+    language: string,
+    texts: string[]
+}
+
+type PokemonType = {
+    type: string,
+    color: string
+}
+
 export {
     PokeCard,
     PokemonAPI,
@@ -114,5 +124,7 @@ export {
     PokemonProfile,
     BasicStats,
     resolveResponse,
-    GenerationPokemons
+    GenerationPokemons,
+    Description,
+    PokemonType
 };

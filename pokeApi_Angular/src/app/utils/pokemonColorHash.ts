@@ -896,7 +896,9 @@ export const pokemonColorMap: Record<string, string> = {
   "895": "#4ca04c",
   "896": "#fbf6f6",
   "897": "black",
-  "898": "#4ca04c"
+  "898": "#4ca04c",
+  "899": "gray",
+  "900": "#7c5151"
 };
 
 export const pokemonTypeColorMap: Record<string, string> = {

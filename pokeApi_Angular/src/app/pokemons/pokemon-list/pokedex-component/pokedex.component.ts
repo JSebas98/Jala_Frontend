@@ -1,8 +1,9 @@
 import { Component, OnInit } from "@angular/core";
-import { PokeCard, PokemonAPI } from "src/app/utils/types";
+import { PaginationDirection, PokeCard, PokemonAPI } from "src/app/utils/types";
 import { PokemonService } from '../../pokemon.service';
 import { ActivatedRoute } from '@angular/router';
 import { pokemonColorMap } from "src/app/utils/pokemonColorHash";
+import { faAngleLeft, faAngleRight, faAnglesLeft, faAnglesRight, faSearch } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
     selector: 'pokedex-component',
@@ -15,9 +16,14 @@ export class PokedexComponent implements OnInit {
     pokecardFilteredList: PokeCard[] = [];
     limit: number = 50;
     offset: number = 0;
+    pageNumber = 1;
     search: string = '';
     generation = 0;
-    messageGeneration = '';
+    searchIcon = faSearch;
+    firstPageIcon = faAnglesLeft;
+    prevPageIcon = faAngleLeft;
+    nextPageIcon = faAngleRight;
+    lastPageIcon = faAnglesRight;
 
     constructor(
         private router: ActivatedRoute,
@@ -27,15 +33,18 @@ export class PokedexComponent implements OnInit {
         this.retrievePokemonList();
     }
 
+    onChange(event: any) {
+        this.getPokemonsByGeneration(event.target.value);
+    }
+
     public retrievePokemonList(): void {
         const pokemons = this.router.snapshot.data['pokedex'];
-        this.pokecardFullList = this.createPokeCardsFromResult(pokemons);
+        this.pokecardFullList = this.createPokeCardsFromResult(pokemons.results);
         this.offset += this.limit;
     }
 
-    private createPokeCardsFromResult(data: {results: PokemonAPI[]}): PokeCard[] {
-        return data.results
-            .map((pokemon) => {
+    private createPokeCardsFromResult(data: PokemonAPI[]): PokeCard[] {
+        return data.map((pokemon) => {
                 const id: string = this.getPokemonIdFromUrl(pokemon.url);
                 return {
                     name: pokemon.name,
@@ -56,29 +65,41 @@ export class PokedexComponent implements OnInit {
         this.pokecardFilteredList = this.pokecardFilteredList.filter(pokecard => pokecard.name.includes(this.search));
     }
 
-    public loadNextPage(number: number): void {
-        const newOffset = this.limit * number;
+    public loadNewPokemons(direction: PaginationDirection): void {
+        this.updatePageNumberByPaginationDirection(direction);
+        const newOffset = this.limit * (this.pageNumber-1);
         if(newOffset !== this.offset) {
             this.offset = newOffset;
             this.pokemonService.getPokemonList(this.offset, this.limit)
             .subscribe(
                 (data: {results: PokemonAPI[]}) => {
-                    this.pokecardFullList = this.createPokeCardsFromResult(data);
+                    this.pokecardFullList = this.createPokeCardsFromResult(data.results);
                 });
         }
     }
 
-    public filterPokemonsByGeneration(generation: number): void {
-        this.generation = generation;
-        if(generation > 0) {
-            this.messageGeneration = `generation ${this.generation}.`;
-            const pokemonNames: string[] = [];
-            const pokemonsByGeneration = this.pokemonService.getPokemonsByGeneration(generation);
-            pokemonsByGeneration.subscribe((generation) => {
-                generation.pokemon_species
-                    .forEach(pokemon => pokemonNames.push(pokemon.name));
-                this.pokecardFilteredList = this.pokecardFullList.slice();
-                this.pokecardFilteredList = this.pokecardFilteredList.filter((pokecard) => pokemonNames.includes(pokecard.name));
+    public updatePageNumberByPaginationDirection(direction: PaginationDirection) {
+        if (direction === 'first') {
+            this.pageNumber = 1;
+        } 
+        if (direction === 'previous') {
+            this.pageNumber -= 1;
+        }
+        if (direction === 'next') {
+            this.pageNumber += 1;
+        }
+        if (direction === 'last') {
+            this.pageNumber = 18;
+        }
+    }
+
+    public getPokemonsByGeneration(generation: number): void {
+        if (generation == 0) {
+            this.retrievePokemonList();
+        } else {
+            this.pokemonService.getPokemonsByGeneration(generation)
+            .subscribe( (pokemons) => {
+                this.pokecardFullList = this.createPokeCardsFromResult(pokemons.pokemon_species);
             });
         }
     }

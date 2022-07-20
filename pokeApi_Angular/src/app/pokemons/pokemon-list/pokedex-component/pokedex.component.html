@@ -1,7 +1,7 @@
 <div class="pokedex">
-    <header class="filters-section">
+    <div class="filters-section">
         <div class="search">
-            <label class="label">Search:</label>
+            <fa-icon class="icon" [icon]="searchIcon"></fa-icon>
             <input
                 [(ngModel)]="search"
                 type="text"
@@ -11,20 +11,35 @@
             /> 
         </div>
         <div class="filter">
-            <label class="label">Filter by generation:</label>
-            <button class="gen-button" (click)="filterPokemonsByGeneration(1)">G1</button>
-            <button class="gen-button" (click)="filterPokemonsByGeneration(2)">G2</button>
-            <button class="gen-button" (click)="filterPokemonsByGeneration(3)">G3</button>
-            <button class="gen-button" (click)="filterPokemonsByGeneration(0)">X</button>
+            <label class="label">Show by generation:</label>
+            <select class="field" (change)="onChange($event)">
+                <option selected value="0">All</option>
+                <option value="1">Generation 1</option>
+                <option value="2">Generation 2</option>
+                <option value="3">Generation 3</option>
+                <option value="4">Generation 4</option>
+            </select>
         </div>
         <div class="pages">
-            <label class="label">Pages:</label>
-            <button class="page-button" (click)="loadNextPage(0)">1</button>
-            <button class="page-button" (click)="loadNextPage(1)">2</button>
-            <button class="page-button" (click)="loadNextPage(2)">3</button>
+            <button class="page-button" *ngIf="pageNumber>1" (click)="loadNewPokemons('first')">
+                <fa-icon class="icon" [icon]="firstPageIcon"></fa-icon>
+            </button>
+            <button class="page-button" *ngIf="pageNumber>1" (click)="loadNewPokemons('previous')">
+                <fa-icon class="icon" [icon]="prevPageIcon"></fa-icon>
+            </button>
+            <input type=text
+                readonly
+                [(ngModel)]="pageNumber"
+                class="page-field"/>
+            <button class="page-button" *ngIf="pageNumber<18" (click)="loadNewPokemons('next')">
+                <fa-icon class="icon" [icon]="nextPageIcon"></fa-icon>
+            </button>
+            <button class="page-button" *ngIf="pageNumber<18" (click)="loadNewPokemons('last')">
+                <fa-icon class="icon" [icon]="lastPageIcon"></fa-icon>
+            </button>
         </div>
-    </header>
-    <div class="main" *ngIf="search==='' && generation === 0; else searchResults">
+    </div>
+    <div class="main" *ngIf="search===''; else searchResults">
         <pokecard-component
             *ngFor="let pokecard of pokecardFullList"
             [pokeCard]="pokecard">
@@ -37,13 +52,9 @@
                 [pokeCard]="pokecard">
             </pokecard-component>
             <div id="no-results" *ngIf="pokecardFilteredList.length === 0">
-                <no-content-component *ngIf="generation === 0 && search!==''; else noGenerationPokemons"
+                <no-content-component
                 [message]="search"></no-content-component>
             </div>
         </div>
-    </ng-template>
-    <ng-template #noGenerationPokemons>
-        <no-content-component
-        [message]="messageGeneration"></no-content-component>
     </ng-template>
 </div>

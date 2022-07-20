@@ -116,6 +116,8 @@ type PokemonType = {
     color: string
 }
 
+type PaginationDirection = 'first' | 'previous' | 'next' | 'last';
+
 export {
     PokeCard,
     PokemonAPI,
@@ -126,5 +128,6 @@ export {
     resolveResponse,
     GenerationPokemons,
     Description,
-    PokemonType
+    PokemonType,
+    PaginationDirection,
 };

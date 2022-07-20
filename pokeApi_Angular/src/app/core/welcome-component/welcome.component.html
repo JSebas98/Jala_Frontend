@@ -1,0 +1,34 @@
+<div class="container">
+    <div class="welcome">
+        <p class="welcome-title">
+            Hi there! Welcome to the Pokemon world!
+        </p>
+        <p class="welcome-message">
+            In this application you'll find a wide range of pokemons. From the most popular to the ones that go unnoticed, they are all here!
+        </p>
+        <p class="welcome-message">
+            Remember: Catch them all!
+        </p>
+    </div>
+
+    <div class="buttons">
+        <div class="option">
+            <p class="options-message">
+                If you're excited as I am, go ahead and visit the Pokedex to check them all!
+            </p>
+            <button routerLink="/pokedex">
+                <img class="btn-img" [src]="pokedexImgURL"/>
+                <p class="btn-text">Pokedex</p>
+            </button>
+        </div>
+        <div class="option">
+            <p class="options-message">
+                But that's not all, you can also create your own Pokemon to join you in your quest!
+            </p>
+            <button routerLink="/pokedex/add-pokemon">
+                <img class="btn-img" [src]="addPokemonImgURL"/>
+                <p class="btn-text">Add pokemon</p>
+            </button>
+        </div>
+    </div>
+</div>

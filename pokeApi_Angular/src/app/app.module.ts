@@ -7,11 +7,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { HeaderComponent } from './core/header-component/header.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { WelcomeComponent } from './core/welcome-component/welcome.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent
+    HeaderComponent,
+    WelcomeComponent,
   ],
   imports: [
     AppRoutingModule,

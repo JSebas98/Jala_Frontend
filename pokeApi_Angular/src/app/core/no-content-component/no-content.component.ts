@@ -6,7 +6,7 @@ import { Component, Input, OnInit } from '@angular/core';
     styleUrls: ['./no-content.component.scss']
 })
 export class NoContentComponent implements OnInit {
-    imgURL = '../../../../assets/no-results-image.png';
+    imgURL = 'assets/no-results-image.png';
     @Input()
     message: string = 'your search.';
 

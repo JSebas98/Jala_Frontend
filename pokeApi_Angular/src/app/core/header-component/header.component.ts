@@ -6,5 +6,5 @@ import { Component } from "@angular/core";
     styleUrls: ['header.component.scss']
 })
 export class HeaderComponent {
-    imgURL = '../../../assets/pokemon-logo.png';
+    imgURL = 'assets/pokemon-logo.png';
 }

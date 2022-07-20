@@ -1,7 +1,9 @@
 <div class="stats-container">
     <h2>Stats</h2>
-    <div class="stat-bar" *ngFor="let stat of pokemonStats">
-        <label [for]="stat.stat" class="stat-name">{{ stat.stat }} - {{ stat.base_stat }}</label>
-        <progress [id]="stat.stat" max="150" [value]="stat.base_stat">{{ stat.base_stat }}</progress>
+    <div class="bar-container">
+        <div class="stat-bar" *ngFor="let stat of pokemonStats">
+            <label [for]="stat.stat" class="stat-name">{{ stat.stat }} - {{ stat.base_stat }}</label>
+            <progress [id]="stat.stat" max="150" [value]="stat.base_stat">{{ stat.base_stat }}</progress>
+        </div>
     </div>
 </div>

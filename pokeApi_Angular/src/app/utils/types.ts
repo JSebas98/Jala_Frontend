@@ -48,6 +48,9 @@ type PokemonSpecies = {
         url: string
     },
     egg_groups: [],
+    evolution_chain: {
+        url: string
+    }
     flavor_text_entries: {
         flavor_text: string,
         language: Language,
@@ -78,7 +81,8 @@ type PokemonProfile = {
     types: PokemonType[],
     stats: BasicStats[],
     color: string,
-    image: string
+    image: string,
+    evolution_chain: string
 }
 
 type Language = {
@@ -118,6 +122,13 @@ type PokemonType = {
 
 type PaginationDirection = 'first' | 'previous' | 'next' | 'last';
 
+type PokemonEvolutionChain = {
+    evolution_details: [],
+    evolves_to: PokemonEvolutionChain[],
+    is_baby: false,
+    species: PokemonAPI
+}
+
 export {
     PokeCard,
     PokemonAPI,
@@ -130,4 +141,5 @@ export {
     Description,
     PokemonType,
     PaginationDirection,
+    PokemonEvolutionChain,
 };

@@ -9,6 +9,7 @@ import { PokemonProfileComponent } from "./pokemon/pokemon-profile/pokemon-profi
 import { PokemonAddComponent } from "./pokemon/pokemon-add/pokemon-add.component";
 import { PokemonStatsChart } from "./pokemon/pokemon-profile/pokemon-stats/pokemon-stats.component";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { PokemonEvolutions } from "./pokemon/pokemon-profile/pokemon-evolutions/pokemon-evolutions.component";
 
 @NgModule({
     declarations: [
@@ -18,6 +19,7 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
         PokemonAddComponent,
         PokemonProfileComponent,
         PokemonStatsChart,
+        PokemonEvolutions,
     ],
     imports: [
         CommonModule,

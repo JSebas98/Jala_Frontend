@@ -1,0 +1,11 @@
+<div class="container">
+    <div class="title">
+        <h2>Evolutions</h2>
+    </div>
+    <div class="evolutions">
+        <p *ngIf="pokemonEvolutions.length === 1">This pokemon doesn't evolve.</p>
+        <pokecard-component
+            *ngFor="let evolution of pokemonEvolutions"
+            [pokeCard]="evolution"></pokecard-component>
+    </div>
+</div>

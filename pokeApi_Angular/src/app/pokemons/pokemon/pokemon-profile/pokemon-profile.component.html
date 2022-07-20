@@ -5,7 +5,9 @@
 <div *ngIf="pokemonProfile" class="main-container">
     <div class="pokemon-profile">
         <div class="pokemon-image">
-            <img id="image"[src]="pokemonProfile.image"/>
+            <img id="image"
+                [src]="pokemonProfile.image"
+                [ngStyle]="{'border-color': pokemonProfile.types[0].color}"/>
         </div>
         <div class="pokemon-basic-info">
             <div class="pokemon-name">
@@ -28,7 +30,10 @@
                 </div>
             </div>
             <div class="pokemon-description">
-                <p *ngFor="let text of pokemonProfile.description[0].texts">{{ text }}</p>
+                <p *ngFor="let text of pokemonProfile.description[0].texts | slice:0:2">{{ text }}</p>
+                <p *ngIf="pokemonProfile.description[0].texts.length === 0">
+                    Oops! There is no description for this Pokemon yet.
+                </p>
             </div>
         </div>
         <div class="pokemon-stats">
@@ -36,6 +41,8 @@
         </div>
     </div>
     <div class="pokemon-evolutions" *ngIf="evolutionsVisible">
-        <h2>Evolutions</h2>
+        <pokemon-evolutions
+            [evolutionChainURL]="pokemonProfile.evolution_chain">
+        </pokemon-evolutions>
     </div>
 </div>

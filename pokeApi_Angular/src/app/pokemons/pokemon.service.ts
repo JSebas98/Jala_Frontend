@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
 import { forkJoin, map, Observable } from "rxjs";
-import { BasicStats, Description, GenerationPokemons, PokemonAPI, PokemonDetails, PokemonProfile, PokemonSpecies, PokemonType } from "../utils/types";
+import { BasicStats, Description, GenerationPokemons, PokemonAPI, PokemonDetails, PokemonEvolutionChain, PokemonProfile, PokemonSpecies, PokemonType } from "../utils/types";
 import { pokemonTypeColorMap } from "../utils/pokemonColorHash";
 
 
@@ -48,7 +48,8 @@ export class PokemonService {
                 types: this.getPokemonTypes(pokemonDetails),
                 stats: this.getPokemonStats(pokemonDetails),
                 color: pokemonSpecies.color.name,
-                image: this.getPokemonImage(pokemonDetails)
+                image: this.getPokemonImage(pokemonDetails),
+                evolution_chain: pokemonSpecies.evolution_chain.url
             }))
         );
 
@@ -61,7 +62,7 @@ export class PokemonService {
     }
 
     getPokemonDescription(pokemonSpecies: PokemonSpecies): Description[] {
-        const versions: string[] = ['x', 'y'];
+        const versions: string[] = ['x', 'y', 'sword', 'legends-arceus'];
         const spanishDescriptions: string[] = pokemonSpecies.flavor_text_entries
             .filter(entry => entry.language.name === 'es' && versions.includes(entry.version.name))
             .map(entry => entry.flavor_text);
@@ -112,5 +113,9 @@ export class PokemonService {
     cleanDuplicateDescriptions(pokemonDescriptions: string[]): string[] {
         const uniqueDescriptions = new Set(pokemonDescriptions);
         return Array.from(uniqueDescriptions);
+    }
+
+    getPokemonEvolutions(url: string): Observable<{ chain: PokemonEvolutionChain }> {
+        return this.http.get(url) as Observable<{ chain: PokemonEvolutionChain }>;
     }
 }

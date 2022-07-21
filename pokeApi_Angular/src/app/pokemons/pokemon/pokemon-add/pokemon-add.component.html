@@ -1,12 +1,78 @@
-<form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
-    <h2>Add new pokemon!</h2>
-    <div>
-        <label for="name">Name</label>
-        <input id="name" type="text" formControlName="pokemonName" />
+<div class="container">
+    <div class="form-container">
+        <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="form">
+            <h2>Add new pokemon!</h2>
+            <div>
+                <mat-form-field appearance="outline" hintLabel="Max 4 numbers" class="input">
+                    <mat-label for="pokemon-id">ID Number</mat-label>
+                    <input
+                        matInput
+                        id="pokemon-id"
+                        formControlName="pokemonID"
+                        type="number"
+                        maxlength="4"
+                    />
+                    <mat-error *ngIf="profileForm.controls['pokemonID'].invalid && profileForm.controls['pokemonID'].touched">
+                        {{ getErrorMessage() }}
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field appearance="outline" hintLabel="Max 20 characters" class="input">
+                    <mat-label for="pokemon-name">Name</mat-label>
+                    <input
+                        matInput
+                        id="pokemon-name"
+                        formControlName="pokemonName"
+                        type="text"
+                        maxlength="20"
+                    />
+                </mat-form-field>
+                <mat-error *ngIf="profileForm.controls['pokemonName'].invalid && profileForm.controls['pokemonName'].touched">
+                    {{ getErrorMessage() }}
+                </mat-error>
+            </div>
+            <div>
+                <mat-form-field appearance="outline" class="input">
+                    <mat-label for="pokemon-image">Image URL</mat-label>
+                    <input
+                        matInput
+                        id="pokemon-image"
+                        formControlName="pokemonImage"
+                        type="text"
+                    />
+                </mat-form-field>
+                <mat-error *ngIf="profileForm.controls['pokemonImage'].invalid && profileForm.controls['pokemonImage'].touched">
+                    {{ getErrorMessage() }}
+                </mat-error>
+            </div>
+            <div>
+                <mat-form-field appearance="outline" class="input">
+                    <mat-label for="pokemon-color">Color</mat-label>
+                    <input
+                        matInput
+                        id="pokemon-color"
+                        formControlName="pokemonColor"
+                        type="color"
+                    />
+                </mat-form-field>
+                <mat-error *ngIf="profileForm.controls['pokemonColor'].invalid && profileForm.controls['pokemonColor'].touched">
+                    {{ getErrorMessage() }}
+                </mat-error>
+            </div>
+        
+            <button
+                mat-raised-button
+                color="primary"
+                type="submit"
+                [disabled]="!profileForm.valid"
+                class="button"
+            >
+                Submit
+            </button>
+        </form>
     </div>
-    <div>
-        <label for="description">Description</label>
-        <input id="description" type="text" formControlName="pokemonDescription" />
+    <div *ngIf="submitted" class="pokecard">
+        <pokecard-component [pokeCard]="pokecard"></pokecard-component>
     </div>
-    <button type="submit">Submit</button>
-</form>
+</div>

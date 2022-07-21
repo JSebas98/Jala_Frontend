@@ -1,0 +1,28 @@
+.container {
+    display: flex;
+    justify-content: space-evenly;
+    padding-top: 3rem;
+
+    .form-container {
+        display: inherit;
+        align-items: center;
+        width: 30%;
+
+        .form {
+            width: 100%;
+        }
+
+        .input {
+            width: 100%;
+        }
+
+        .button {
+            width: 50%;
+        }
+    }
+
+    .pokecard {
+        display: inherit;
+        align-items: center;
+    }
+}

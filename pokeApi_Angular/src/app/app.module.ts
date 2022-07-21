@@ -8,6 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HeaderComponent } from './core/header-component/header.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { WelcomeComponent } from './core/welcome-component/welcome.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { WelcomeComponent } from './core/welcome-component/welcome.component';
     AppRoutingModule,
     BrowserModule,
     FontAwesomeModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

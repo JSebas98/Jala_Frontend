@@ -10,6 +10,17 @@ import { PokemonAddComponent } from "./pokemon/pokemon-add/pokemon-add.component
 import { PokemonStatsChart } from "./pokemon/pokemon-profile/pokemon-stats/pokemon-stats.component";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { PokemonEvolutions } from "./pokemon/pokemon-profile/pokemon-evolutions/pokemon-evolutions.component";
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatButtonModule } from '@angular/material/button';
+
+const materialModules = [
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatButtonModule
+];
 
 @NgModule({
     declarations: [
@@ -27,6 +38,7 @@ import { PokemonEvolutions } from "./pokemon/pokemon-profile/pokemon-evolutions/
         FontAwesomeModule,
         PokemonRoutingModule,
         ReactiveFormsModule,
+        ...materialModules
     ],
     exports: [ ],
     providers: [ ],

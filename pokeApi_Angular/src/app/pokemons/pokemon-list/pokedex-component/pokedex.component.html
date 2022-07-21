@@ -31,10 +31,10 @@
                 readonly
                 [(ngModel)]="pageNumber"
                 class="page-field"/>
-            <button class="page-button" *ngIf="pageNumber<18" (click)="loadNewPokemons('next')">
+            <button class="page-button" *ngIf="pageNumber<17" (click)="loadNewPokemons('next')">
                 <fa-icon class="icon" [icon]="nextPageIcon"></fa-icon>
             </button>
-            <button class="page-button" *ngIf="pageNumber<18" (click)="loadNewPokemons('last')">
+            <button class="page-button" *ngIf="pageNumber<17" (click)="loadNewPokemons('last')">
                 <fa-icon class="icon" [icon]="lastPageIcon"></fa-icon>
             </button>
         </div>

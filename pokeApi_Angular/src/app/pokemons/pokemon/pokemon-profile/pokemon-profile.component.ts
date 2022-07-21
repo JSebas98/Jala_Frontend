@@ -1,6 +1,6 @@
 import { Location } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from '@angular/router';
 import { faArrowsUpDown, faChevronUp, faWeightHanging } from "@fortawesome/free-solid-svg-icons";
 import { PokemonProfile } from 'src/app/utils/types';
 import { PokemonService } from "../../pokemon.service";
@@ -20,15 +20,17 @@ export class PokemonProfileComponent implements OnInit {
 
     constructor(
         private pokemonService: PokemonService,
-        private location: Location,
+        private router: Router,
         private route: ActivatedRoute) { }
 
     ngOnInit() {
-        this.retrievePokemonInfo();
+        this.route.paramMap.subscribe((params) => {
+            const id = params.get('id') || '1';
+            this.retrievePokemonInfo(parseInt(id));
+        });
     }
     
-    retrievePokemonInfo() {
-        const pokemonId = this.route.snapshot.params['id'];
+    retrievePokemonInfo(pokemonId: number) {
         this.pokemonService.getPokemonProfile(pokemonId)
             .subscribe((pokemon) => {
                 this.pokemonProfile = pokemon;
@@ -36,7 +38,7 @@ export class PokemonProfileComponent implements OnInit {
     }
     
     goBack() {
-        this.location.back();
+        this.router.navigate([`/pokedex`]);
     }
 
     toogleEvolutions() {

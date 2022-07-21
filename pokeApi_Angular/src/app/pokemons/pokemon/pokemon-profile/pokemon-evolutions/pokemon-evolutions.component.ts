@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { pokemonColorMap } from 'src/app/utils/pokemonColorHash';
 import { PokeCard, PokemonEvolutionChain } from 'src/app/utils/types';
 import { PokemonService } from '../../../pokemon.service';
@@ -14,6 +15,7 @@ export class PokemonEvolutions implements OnInit {
     evolutionChainURL!: string;
 
     pokemonEvolutions: PokeCard[] = [];
+    evolutionStepIcon = faAngleRight;
 
     constructor(private pokemonService: PokemonService) {}
 

@@ -89,7 +89,7 @@ export class PokedexComponent implements OnInit {
             this.pageNumber += 1;
         }
         if (direction === 'last') {
-            this.pageNumber = 18;
+            this.pageNumber = 17;
         }
     }
 

@@ -1,0 +1,31 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .title {
+        padding-left: 3rem;
+    }
+
+    .evolutions {
+        display: inherit;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 2rem;
+        background-color: #f2f5f2;
+        margin: 0px 10% 1rem 10%;
+        border-radius: 1rem;
+        border: 4px solid gray;
+
+        .evolution-card {
+            display: inherit;
+            align-items: center;
+
+            .icon {
+                font-size: 5rem;
+                padding: 1rem;
+            }
+        }
+    }
+}

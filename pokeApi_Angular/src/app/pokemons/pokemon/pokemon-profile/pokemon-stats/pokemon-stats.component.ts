@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { BasicStats } from 'src/app/utils/types';
 
 @Component({
@@ -6,12 +6,11 @@ import { BasicStats } from 'src/app/utils/types';
     templateUrl: './pokemon-stats.component.html',
     styleUrls: ['./pokemon-stats.component.scss']
 })
-export class PokemonStatsChart implements OnInit {
+export class PokemonStatsChart implements OnChanges {
     @Input()
     pokemonStats!: BasicStats[];
 
-
-    ngOnInit() {
+    ngOnChanges() {
         this.formatStatNames();
     }
 
